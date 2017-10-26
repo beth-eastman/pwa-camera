@@ -47,9 +47,8 @@ class AppRoutes extends React.Component<Props, State>{
 
   render() {
 
-    //const props = {...this.props, basePath: '/'};
 
-    return <Route appPage={this.props.appPage} path="/" render={() => <StoreRoutes appPage={this.props.appPage} />} />;
+    return <Route appPage={this.props.appPage} render={() => <StoreRoutes appPage={this.props.appPage} />} />;
 
   }
 }

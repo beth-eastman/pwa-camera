@@ -31,31 +31,92 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/menu';
-import { Link } from 'react-router-dom';
+
+import Menu, { MenuItem } from 'material-ui-next/Menu';
+import IconButton from 'material-ui-next/IconButton';
+import { withStyles } from 'material-ui-next/styles';
+import MenuIcon from 'material-ui-icons/Menu';
+import { withRouter } from 'react-router-dom';
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+});
 
 export interface Props{
   basePath: string;
+  classes: any;
+  history: {
+    push: (path: string) => void;
+  }
 }
 
-const LeftMenu: React.SFC<Props> = (props) => {
-  const {basePath} = props;
-  return (
-    <IconMenu
-
-      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-      targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    >
-      <MenuItem containerElement={<Link to={'/'} />} primaryText="Home" />
-      <MenuItem containerElement={<Link to={basePath + '/appinfo'} />} primaryText="Demo Home" />
-      <MenuItem containerElement={<Link to={basePath+"/products"} />} primaryText="Products" />
-    </IconMenu>
-    );
+export interface State{
+  anchorEl: any;
+  open: boolean;
 }
 
+class LeftMenu extends React.Component<Props, State>{
+  constructor(props){
+    super(props);
+    this.state = {
+      anchorEl: null,
+      open: false
+    }
+  }
 
-export default LeftMenu;
+  navClick = (path) => {
+    const {history} = this.props;
+    return (event) => {
+      this.setState({ open: false, anchorEl: event.currentTarget });
+      history.push(path);
+    }
+  }
+
+  handleRequestClose = (event) => {
+    this.setState({ open: false });
+  }
+
+  handleClick = (event) => {
+    this.setState({ open: true, anchorEl: event.currentTarget });
+  }
+
+  render(){
+    const {basePath,classes} = this.props;
+
+    return (<div><IconButton className={classes.menuButton}
+              aria-label="More"
+              aria-owns={this.state.open ? 'long-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+          >
+              <MenuIcon />
+
+         </IconButton>
+                       <Menu
+                id="long-menu"
+                anchorEl={this.state.anchorEl}
+                open={this.state.open}
+                onRequestClose={this.handleRequestClose}
+                PaperProps={{
+
+                }}
+              >
+                <MenuItem onClick={this.navClick(basePath )}>Home</MenuItem>
+                <MenuItem onClick={this.navClick(basePath + 'appinfo')}>Demo Home</MenuItem>
+                <MenuItem onClick={this.navClick(basePath + 'products')}>Products</MenuItem>
+              </Menu></div>)
+    ;
+  }
+}
+
+export default withRouter(withStyles(styles)(LeftMenu));
+

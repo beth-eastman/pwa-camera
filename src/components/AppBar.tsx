@@ -31,9 +31,28 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import MuiAppBar from 'material-ui/AppBar';
-import {appBarTitleStyle, appBarIconeStyle} from './commonStyles';
-const appIcon = require("../res/images/ui/app_icon_48.png")
+import MuiAppBar from 'material-ui-next/AppBar';
+import Toolbar from 'material-ui-next/Toolbar';
+import Typography from 'material-ui-next/Typography';
+//import IconButton from 'material-ui-next/IconButton';
+import { withStyles } from 'material-ui-next/styles';
+//import MenuIcon from 'material-ui-icons/Menu';
+//import {appBarTitleStyle, appBarIconeStyle} from './commonStyles';
+//const appIcon = require("../res/images/ui/app_icon_48.png")
+
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+});
 
 export interface Props {
   // class AppBar (defined below) will expect to be passed these properties
@@ -41,6 +60,7 @@ export interface Props {
   rightIcon: JSX.Element,
   title: string;
   onTitleClick: (event: any) => void;
+  classes: any;
 }
 
 export interface State {
@@ -48,11 +68,12 @@ export interface State {
 
 // The return value is passed to the title property of the app bar component
 const getTitleIcon = (title) => {
+           // <div style={{position: 'relative',top: 4}} >
+           //   <img style={{width: 40, display: 'block', float: 'left',position: 'relative', top: 6}} src={appIcon} />
+           //   <div style={{position: 'relative', top: -5, left: 5}}>{title}</div>
+           // </div>
   return <div>
-           <div style={{position: 'relative',top: 4}} >
-             <img style={{width: 40, display: 'block', float: 'left',position: 'relative', top: 6}} src={appIcon} />
-             <div style={{position: 'relative', top: -5, left: 5}}>{title}</div>
-           </div>
+          {title}
          </div>;
 }
 
@@ -61,18 +82,30 @@ const getTitleIcon = (title) => {
  * 
  * @see http://www.material-ui.com/#/components/app-bar
  */
-export default class AppBar extends React.Component<Props, State>{
+class AppBar extends React.Component<Props, State>{
 
 
   render(){
-    const {title,leftIcon,onTitleClick,rightIcon} = this.props;
-    return <MuiAppBar
-              titleStyle={appBarTitleStyle}
-              iconStyleLeft={appBarIconeStyle}
-              title={getTitleIcon(title)}
-              onTitleTouchTap={onTitleClick}
-              iconElementLeft={leftIcon}
-              iconElementRight={rightIcon}
-              />;
+    const {title, leftIcon/*,onTitleClick,rightIcon*/} = this.props;
+    return    <MuiAppBar position="static" color="default">
+        <Toolbar>
+          {leftIcon}
+
+          <Typography type="title" color="inherit">
+            {getTitleIcon(title)}
+          </Typography>
+        </Toolbar>
+      </MuiAppBar>;
+
+    // return <MuiAppBar
+    //           titleStyle={appBarTitleStyle}
+    //           iconStyleLeft={appBarIconeStyle}
+    //           title={getTitleIcon(title)}
+    //           onTitleTouchTap={onTitleClick}
+    //           iconElementLeft={leftIcon}
+    //           iconElementRight={rightIcon}
+    //           />;
   }
 }
+
+export default withStyles(styles)(AppBar);
