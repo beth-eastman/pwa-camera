@@ -31,8 +31,8 @@
  */
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
-import CommandListItem from './ProductListItem';
-import {List} from 'material-ui/List';
+import ProductListItem from './ProductListItem';
+import List from 'material-ui-next/List';
 import {AppPageInterface} from '../Main';
 import {whiteContainer} from '../commonStyles';
 
@@ -64,7 +64,7 @@ export default class ProductFavoritesListPage extends React.Component<Props, Sta
               <List>
                 {!hasFavorites && <h3>Your Favorites List is empty</h3>}
                 {products.map(product => {
-                  return <CommandListItem key={product.id} itemClick={this.handleItemClick} product={product} />
+                  return <ProductListItem key={product.id} itemClick={this.handleItemClick} product={product} />
                 })}
               </List>
 

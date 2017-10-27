@@ -40,6 +40,7 @@ import { withStyles } from 'material-ui-next/styles';
 //import {appBarTitleStyle, appBarIconeStyle} from './commonStyles';
 //const appIcon = require("../res/images/ui/app_icon_48.png")
 
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
@@ -54,6 +55,9 @@ const styles = theme => ({
   },
 });
 
+
+//const appIcon = require("../res/images/ui/app_icon_48.png")
+
 export interface Props {
   // class AppBar (defined below) will expect to be passed these properties
   leftIcon: JSX.Element,
@@ -67,6 +71,7 @@ export interface State {
 }
 
 // The return value is passed to the title property of the app bar component
+
 const getTitleIcon = (title) => {
            // <div style={{position: 'relative',top: 4}} >
            //   <img style={{width: 40, display: 'block', float: 'left',position: 'relative', top: 6}} src={appIcon} />
@@ -86,7 +91,8 @@ class AppBar extends React.Component<Props, State>{
 
 
   render(){
-    const {title, leftIcon/*,onTitleClick,rightIcon*/} = this.props;
+    const {title, leftIcon/*,onTitleClick*/,rightIcon} = this.props;
+    console.log(rightIcon);
     return    <MuiAppBar position="static" color="default">
         <Toolbar>
           {leftIcon}
@@ -94,17 +100,11 @@ class AppBar extends React.Component<Props, State>{
           <Typography type="title" color="inherit">
             {getTitleIcon(title)}
           </Typography>
+
+          {rightIcon}
         </Toolbar>
       </MuiAppBar>;
 
-    // return <MuiAppBar
-    //           titleStyle={appBarTitleStyle}
-    //           iconStyleLeft={appBarIconeStyle}
-    //           title={getTitleIcon(title)}
-    //           onTitleTouchTap={onTitleClick}
-    //           iconElementLeft={leftIcon}
-    //           iconElementRight={rightIcon}
-    //           />;
   }
 }
 

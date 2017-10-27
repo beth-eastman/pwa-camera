@@ -35,7 +35,7 @@
  */
 import * as React from 'react';
 
-import {Tab} from 'material-ui/Tabs';
+import {Tab} from 'material-ui-next/Tabs';
 import {AppPageInterface} from './Main';
 
 export interface Props {
@@ -80,7 +80,7 @@ export default class RouteGroup extends React.Component<Props,any> {
     this.props.children
       .filter((child) => typeof child.props['tab'] !== 'undefined')
       .map((child, idx) => {
-        tabs.push(<Tab onActive={this.handleTabActive(child.props.path)} label={child.props.title} value={idx} />);
+        tabs.push(<Tab onClick={this.handleTabActive(child.props.path)} label={child.props.title} value={idx} />);
       });
 
     appPage.setDefaultTabs(tabs);

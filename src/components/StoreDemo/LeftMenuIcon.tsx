@@ -90,9 +90,9 @@ class LeftMenu extends React.Component<Props, State>{
   }
 
   render(){
-    const {basePath,classes} = this.props;
+    const {basePath/*,classes*/} = this.props;
 
-    return (<div><IconButton className={classes.menuButton}
+    return (<div><IconButton 
               aria-label="More"
               aria-owns={this.state.open ? 'long-menu' : null}
               aria-haspopup="true"

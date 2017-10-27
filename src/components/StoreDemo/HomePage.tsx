@@ -31,7 +31,8 @@
  */
 import * as React from 'react';
 import {AppPageInterface} from '../Main';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from 'material-ui-next/Checkbox';
+import { FormGroup, FormControlLabel } from 'material-ui-next/Form';
 export interface Props {
   appPage: AppPageInterface;
 }
@@ -44,14 +45,14 @@ export default class HomePage extends React.Component<Props, {}>{
     const versionChanged = appPage.version !== '0.0.0';
     return <div>
               <div>
-                <h3>Version</h3>
-                <p>Make sure you update your version number for each deployment</p>
-                <Checkbox checked={versionChanged} label={'Version: ' + appPage.version} />
-                {!versionChanged &&<div>Please change from the default version number in your webpack config<br />
+                <FormGroup row>
+                  <FormControlLabel control={<Checkbox checked={versionChanged} />} label={'Version: ' + appPage.version} />
+                </FormGroup>
+
+              
+                {!versionChanged && <div>Please change from the default version number in your webpack config<br />
                   You will need to restart webpack
                   </div>}
-
-
               </div>
               <div>
                   <h3>View Port Dimensions</h3>

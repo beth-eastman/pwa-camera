@@ -1,7 +1,6 @@
 /**
- * @file AppChecklist.tsx
- * Components displays if the application has been update and notifies
- * the user to update the version number.
+ * @file MainTabs.tsx
+ * Renders the AppBar, Tabs, and Main content for the application.
  *
  * Created by T2 on 08/22/2017
  *
@@ -31,24 +30,51 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import {AppPageInterface} from '../Main';
-import Checkbox from 'material-ui/Checkbox';
+import Tabs from 'material-ui-next/Tabs';
+import MainContent from './MainContent';
+import {AppPageInterface} from './Main';
+import AppBar from '../containers/AppBar';
+
 export interface Props {
+  setPageTitle(title:string): void;
+  screen:{width: number, height: number,orientation: string}
+  title: string;
+  defaultTitle: string;
+  leftIcon: JSX.Element;
+  rightIcon: JSX.Element;
+  titlePath: string;
   appPage: AppPageInterface;
+  tabId: number;
+  tabsId: string | number;
+  onTitleClick: (event: any) => void;
+  mainTabs: JSX.Element[]
 }
 
-export default class AppChecklist extends React.Component<Props, {}>{
+export interface State {
 
-  render(){
+}
+
+export default class MainTabs extends React.Component<any,any> {
+
+  handleChange = (event, value) => {
     const {appPage} = this.props;
-    const versionChanged = appPage.version !== '0.0.0';
-    return <div>
-              <div>
-                <Checkbox checked={versionChanged} label={'Version: ' + appPage.version} />
-                {!versionChanged &&<div>Please change from the default version number in your webpack config<br />
-                  You will need to restart webpack
-                  </div>}
-              </div>
-    </div>;
+    appPage.selectTab(null,value);
+  }
+
+  render() {
+
+    const defaultProps = {...this.props,basePath: '/',mainTabs: undefined};
+    const tabs = typeof this.props.tempTabs !== 'undefined' ? this.props.tempTabs : this.props.mainTabs;
+    return (
+      <div>
+        <AppBar rightIcon={this.props.rightIcon} defaultTitle={this.props.title}  leftIcon={this.props.leftIcon} onTitleClick={this.props.onTitleClick} />
+        <Tabs
+          value={this.props.tabId}
+          onChange={this.handleChange}
+          children={tabs}
+        />
+        <MainContent {...defaultProps} />
+      </div>
+    );
   }
 }

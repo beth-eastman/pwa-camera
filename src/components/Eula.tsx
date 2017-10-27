@@ -30,24 +30,38 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Dialog from 'material-ui/Dialog';
 import Button from 'material-ui-next/Button';
-import {fullWidthDialagStyle} from './commonStyles';
+import { withStyles } from 'material-ui-next/styles'
+//import {fullWidthDialagStyle} from './commonStyles';
 import {eula} from '../res/data/settings';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from 'material-ui-next/Dialog';
 
+const styles = { //TODO doesn't work
+  paragraph: {
+    root: {
+      marginBottom: 50
+    }
+  }
+}
 
 interface MyProps {
   eulaAccepted: boolean;
   accept(): any;
   reject(): any;
   hideRejectButton: boolean;
+  classes: any;
 }
 
 interface MyState {
   suppressOpen: boolean;
 }
 
-export default class Eula extends React.Component<MyProps, MyState> {
+export class Eula extends React.Component<MyProps, MyState> {
   constructor(props){
     super(props);
     this.state = {suppressOpen: true};
@@ -59,7 +73,7 @@ export default class Eula extends React.Component<MyProps, MyState> {
   }
 
   render(){
-    const {accept,reject,eulaAccepted,hideRejectButton} = this.props;
+    const {accept,reject,eulaAccepted,hideRejectButton,classes} = this.props;
     let actions = [
       <Button
         color="primary"
@@ -79,17 +93,24 @@ export default class Eula extends React.Component<MyProps, MyState> {
 
         <Dialog
           title="EULA"
-          actions={actions}
-          modal={false}
+          //modal={false}
           open={!eulaAccepted && !this.state.suppressOpen}
-          contentStyle={fullWidthDialagStyle}
-          autoScrollBodyContent={true}
+          //contentStyle={fullWidthDialagStyle}
+          //autoScrollBodyContent={true}
         >
-          <h3>{eula.title}</h3>
-          {eula.paragraphs.map((para,i) => <p key={i}>{para}</p>)}
-
+          <DialogTitle>{eula.title}</DialogTitle>
+          <DialogContent>
+            {eula.paragraphs.map((para,i) => {
+              return <DialogContentText className={classes.paragraph} key={i}>{para}</DialogContentText>;
+            })}
+          </DialogContent>
+          <DialogActions>
+            {actions}
+          </DialogActions>
         </Dialog>
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Eula)

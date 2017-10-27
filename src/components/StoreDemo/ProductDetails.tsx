@@ -32,11 +32,12 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import {AppPageInterface} from '../Main';
-import FavoriteCheckbox from '../FavoriteCheckBox';
+//import FavoriteCheckbox from '../FavoriteCheckBox';
 import ProductContextMenu from './ProductContextMenu';
-import {Card, /*CardActions, CardHeader,*/ CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card, { /*CardActions,*/ CardContent, CardMedia } from 'material-ui-next/Card';
+import Typography from 'material-ui-next/Typography';
 
-
+//TODO re-implement overlay and favoriting feature
 export interface Props {
   product: ProductInterface;
   appPage: AppPageInterface;
@@ -67,25 +68,31 @@ export default class ProductDetails extends React.Component<Props, State>{
   }
 
   render(){
-    const {product,isFavorite} = this.props;
+    const {product/*,isFavorite*/} = this.props;
 
+    //return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
+    return   <Card>
+      <CardMedia
+        image={product.image}
+        title={product.title}
+        // overlay={<CardTitle title={<div>${product.price}
 
-    return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
-    <CardMedia
-      overlay={<CardTitle title={<div>${product.price}
-
-        <div style={{position: 'absolute',top: 10, right: 0}}>
-          <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
-        </div>
-      </div>}  />}
-    >
-      <img  src={product.image} alt="" />
-    </CardMedia>
-    <CardTitle title={product.title} subtitle="By ACME" />
-    <CardText>
-        <div>{product.description}</div>
-
-    </CardText>
-  </Card>
+        //   <div style={{position: 'absolute',top: 10, right: 0}}>
+        //     <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
+        //   </div>
+        // </div>}  />}
+      />
+      <CardContent>
+        <Typography type="headline" component="h2">
+          {product.title}
+        </Typography>
+        <Typography type="subheading" component="h4">
+          By ACME
+        </Typography>
+        <Typography component="p">
+            {product.description}
+        </Typography>
+      </CardContent> 
+    </Card>
   }
 }

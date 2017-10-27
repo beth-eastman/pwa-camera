@@ -32,7 +32,7 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 
-import {ListItem} from 'material-ui/List';
+import {ListItem,ListItemText} from 'material-ui-next/List';
 
 export interface Props {
   product: ProductInterface;
@@ -56,10 +56,8 @@ export default class CommandItem extends React.Component<Props, State>{
     const {product} = this.props;
     let distanceString = '';
 
-    return <ListItem
-            onTouchTap={this.handleItemClick}
-            primaryText={product.title}
-            secondaryText={distanceString}
-            />
+    return <ListItem onClick={this.handleItemClick}>
+              <ListItemText primary={product.title} secondary={distanceString} />
+            </ListItem>;
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "navy-mtf",
-  "version": "1.0.0",
-  "description": "Navy Medicine",
+  "name": "t2-starter-app",
+  "version": "2.0.0",
+  "description": "Starter App",
   "main": "index.ts",
   "author": "T2",
   "license": "MIT",

@@ -30,7 +30,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Snackbar from 'material-ui/Snackbar';
+//TODO
 
 export interface Props {
   message: string;
@@ -56,11 +56,12 @@ export default class SnackbarGlobal extends React.Component<Props, State>{
   }
 
   render(){
-    return  <Snackbar
-              open={this.props.open}
-              message={this.props.message}
-              onActionTouchTap={this.handleOnclick}
-              action="Close"
-              />;
+    return null;
+    // return  <Snackbar
+    //           open={this.props.open}
+    //           message={this.props.message}
+    //           onActionTouchTap={this.handleOnclick}
+    //           action="Close"
+    //           />;
   }
 }

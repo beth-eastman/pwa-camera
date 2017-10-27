@@ -30,11 +30,10 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import IconButton from 'material-ui/IconButton';
-import FirstPageIcon from 'material-ui/svg-icons/navigation/first-page';
-import LastPageIcon from 'material-ui/svg-icons/navigation/last-page';
-import NextPageIcon from 'material-ui/svg-icons/navigation/chevron-right';
-import PrevPageIcon from 'material-ui/svg-icons/navigation/chevron-left';
+// import FirstPageIcon from 'material-ui-icons/FirstPage';
+// import LastPageIcon from 'material-ui-icons/LastPage';
+// import NextPageIcon from 'material-ui-icons/ChevronRight';
+// import PrevPageIcon from 'material-ui-icons/ChevronLeft';
 export interface Props {
   setPage: (pageIdx: number) => void;
   page: number;
@@ -45,7 +44,7 @@ export interface State {
 
 }
 
-export default class CommandsPagination extends React.Component<Props, State>{
+export default class ProductPagination extends React.Component<Props, State>{
 
   onShowMore = (event) => {
     const {page,setPage} = this.props;
@@ -84,21 +83,21 @@ export default class CommandsPagination extends React.Component<Props, State>{
   }
 
   render(){
-    const {page, lastPage} = this.props;
 
-        return <div>
-           <IconButton disabled={!(page > 0)} onTouchTap={this.onShowFirst}>
-             <FirstPageIcon />
-           </IconButton>
-           <IconButton disabled={!(page > 0)} onTouchTap={this.onShowLess}>
-             <PrevPageIcon />
-           </IconButton>
-           <IconButton disabled={!(page < lastPage - 1)} label={'Next'} onTouchTap={this.onShowMore}>
-             <NextPageIcon />
-           </IconButton>
-           <IconButton disabled={!(page < lastPage - 1)}  onTouchTap={this.onShowLast}>
-             <LastPageIcon />
-           </IconButton>
-        </div>;
+      return <h1>Comming Soon</h1>;
+        // return <div>
+        //    <IconButton disabled={!(page > 0)} onTouchTap={this.onShowFirst}>
+        //      <FirstPageIcon />
+        //    </IconButton>
+        //    <IconButton disabled={!(page > 0)} onTouchTap={this.onShowLess}>
+        //      <PrevPageIcon />
+        //    </IconButton>
+        //    <IconButton disabled={!(page < lastPage - 1)} label={'Next'} onTouchTap={this.onShowMore}>
+        //      <NextPageIcon />
+        //    </IconButton>
+        //    <IconButton disabled={!(page < lastPage - 1)}  onTouchTap={this.onShowLast}>
+        //      <LastPageIcon />
+        //    </IconButton>
+        // </div>;
   }
 }

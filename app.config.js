@@ -33,7 +33,7 @@
 *
 */
 
-const appVersion = '0.0.0'
+const appVersion = '2.0.0'
 
 module.exports = {
     name: 'Demo App', // name of your app

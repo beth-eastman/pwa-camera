@@ -30,9 +30,9 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react'
-import IconButton from 'material-ui/IconButton';
-import MoreVirt from 'material-ui/svg-icons/navigation/more-vert';
+import IconButton from 'material-ui-next/IconButton';
 
+import MoreVertIcon from 'material-ui-icons/MoreVert';
 export interface Props {
 
 }
@@ -40,8 +40,14 @@ export interface Props {
 export default class RightIcon extends React.Component<Props,{}> {
 
   render() {
-    return <IconButton>
-                  <MoreVirt />
-                </IconButton>;
+    return <IconButton 
+              aria-label="More"
+              aria-owns={null}
+              aria-haspopup="true"
+
+          >
+              <MoreVertIcon />
+
+         </IconButton>;
   }
 }

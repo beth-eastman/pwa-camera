@@ -32,8 +32,7 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import FavoriteCheckbox from '../FavoriteCheckBox';
-import {GridList, GridTile} from 'material-ui/GridList';
-
+import { GridList, GridListTile, GridListTileBar } from 'material-ui-next/GridList';
 import {AppPageInterface} from '../Main'
 export interface FavoriteProductInterface extends ProductInterface{
   isFavorite: boolean;
@@ -89,22 +88,20 @@ export default class ProductsList extends React.Component<Props, State>{
   render(){
     const {products/*page,lastPage,setPage,*/} = this.props;
 
-    return <div>
+    return <GridList cellHeight={180}>
+         {products.map(tile => {
+           return  <GridListTile key={tile.id}>
+            <img src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
+            <GridListTileBar
+              title={tile.title}
+              subtitle={<span>by: Someone</span>}
+              actionIcon={
+                <FavoriteCheckbox toggleFavorite={this.handleToggleFavorite(tile)} checked={tile.isFavorite} />
+              }
+            />
+          </GridListTile>
+         })}
 
-
-              <GridList cols={this.props.cols}>
-                {products.map(product => {
-                  return <GridTile
-                            key={product.id}
-                            title={product.title}
-                            onTouchTap={this.handleItemClick(product)}
-                            actionIcon={<FavoriteCheckbox toggleFavorite={this.handleToggleFavorite(product)} checked={product.isFavorite} />}
-                          >
-                            <img key={product.image} src={product.image} />
-                          </GridTile>
-                })}
-              </GridList>
-
-           </div>;
+    </GridList>
   }
 }

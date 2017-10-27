@@ -32,7 +32,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-const loadMainTabs = require('bundle-loader?lazy!./MainTabs');
+const loadLayout = require('bundle-loader?lazy!./Layout');
 import Bundle from './Bundle';
 import LeftMenuIcon from './LeftMenuIcon';
 
@@ -220,9 +220,9 @@ export default class Main extends React.Component<Props, State>{
   render(){
 
     //async loading
-    return <Bundle load={loadMainTabs} >
-      {(MainTabs) => {
-          return <MainTabs appPage={this.getAppPageObject()} {...this.state} onTitleClick={this.handleTitleClick} />
+    return <Bundle load={loadLayout} >
+      {(Layout) => {
+          return <Layout appPage={this.getAppPageObject()} {...this.state} onTitleClick={this.handleTitleClick} />
         }}
     </Bundle>
   }
