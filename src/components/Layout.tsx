@@ -72,6 +72,7 @@ export default class MainTabs extends React.Component<any,any> {
           value={this.props.tabId}
           onChange={this.handleChange}
           children={tabs}
+          fullWidth
         />
         <MainContent {...defaultProps} />
       </div>

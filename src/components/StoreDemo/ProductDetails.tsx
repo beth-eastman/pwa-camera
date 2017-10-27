@@ -36,20 +36,31 @@ import {AppPageInterface} from '../Main';
 import ProductContextMenu from './ProductContextMenu';
 import Card, { /*CardActions,*/ CardContent, CardMedia } from 'material-ui-next/Card';
 import Typography from 'material-ui-next/Typography';
-
+import {withStyles} from 'material-ui-next/styles';
 //TODO re-implement overlay and favoriting feature
+const styles = {
+  card: {
+    maxWidth: 500,
+  },
+  media: {
+    height: 500,
+    width: 500
+  },
+};
+
 export interface Props {
   product: ProductInterface;
   appPage: AppPageInterface;
   isFavorite: boolean;
   toggleFavorite: (product: ProductInterface, isFavorite:boolean) => void;
+  classes: any;
 }
 
 export interface State {
 
 }
 
-export default class ProductDetails extends React.Component<Props, State>{
+export class ProductDetails extends React.Component<Props, State>{
 
   componentWillMount(){
       const {product,appPage} = this.props;
@@ -68,11 +79,12 @@ export default class ProductDetails extends React.Component<Props, State>{
   }
 
   render(){
-    const {product/*,isFavorite*/} = this.props;
+    const {product, classes/*,isFavorite*/} = this.props;
 
     //return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
-    return   <Card>
+    return   <Card className={classes.card}>
       <CardMedia
+        className={classes.media}
         image={product.image}
         title={product.title}
         // overlay={<CardTitle title={<div>${product.price}
@@ -96,3 +108,5 @@ export default class ProductDetails extends React.Component<Props, State>{
     </Card>
   }
 }
+
+export default withStyles(styles)(ProductDetails);

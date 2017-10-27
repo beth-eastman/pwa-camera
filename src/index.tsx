@@ -48,7 +48,11 @@ import reducer from './reducers';
 import {setUserPlatform} from './actions';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 OfflinePluginRuntime.install();
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', // Switching the dark mode on is a single property value change.
+  },
+});
 injectTapEventPlugin();
 
 require('./index.html'); //load and emit index.html to destination directory

@@ -41,11 +41,9 @@ import Dialog, {
   DialogTitle
 } from 'material-ui-next/Dialog';
 
-const styles = { //TODO doesn't work
+const styles = {
   paragraph: {
-    root: {
-      marginBottom: 50
-    }
+      marginBottom: 15
   }
 }
 
@@ -74,15 +72,18 @@ export class Eula extends React.Component<MyProps, MyState> {
 
   render(){
     const {accept,reject,eulaAccepted,hideRejectButton,classes} = this.props;
+    console.log(classes);
     let actions = [
       <Button
         color="primary"
+        key='acceptbtn'
         onClick={accept}
       >Accept</Button>
     ];
 
     if(!hideRejectButton){
       actions.push(<Button
+            key='rejectbtn'
             color="primary"
             onClick={reject}
         >Reject</Button>);
