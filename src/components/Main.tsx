@@ -192,7 +192,7 @@ export default class Main extends React.Component<Props, State>{
                  });
 
                 },
-              500);
+              100);
        }
 
 

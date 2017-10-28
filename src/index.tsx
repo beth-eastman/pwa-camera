@@ -125,12 +125,11 @@ const render = (RootComponent: any) => {
     ReactDOM.render(
         <AppContainer>
          <MuiThemeProvider theme={theme}>
-
-              <Provider store={store}>
-                <HashRouter>
-                  <RootComponent version={__APP_VERSION__} defaultTitle={__APP_NAME__} />
-                </HashRouter>
-              </Provider>
+          <Provider store={store}>
+            <HashRouter>
+              <RootComponent version={__APP_VERSION__} defaultTitle={__APP_NAME__} />
+            </HashRouter>
+          </Provider>
           </MuiThemeProvider>
         </AppContainer>,
         document.getElementById("spaApp")

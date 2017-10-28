@@ -1,0 +1,2 @@
+React.PureComponent
+https://reactjs.org/docs/optimizing-performance.html

@@ -92,17 +92,19 @@ class LeftMenu extends React.Component<Props, State>{
   render(){
     const {basePath/*,classes*/} = this.props;
 
-    return (<div><IconButton 
+    return [<IconButton 
+              key='menu-icon'
               aria-label="More"
-              aria-owns={this.state.open ? 'long-menu' : null}
+              aria-owns={this.state.open ? 'main-menu' : null}
               aria-haspopup="true"
               onClick={this.handleClick}
           >
               <MenuIcon />
 
-         </IconButton>
-                       <Menu
-                id="long-menu"
+         </IconButton>,
+         <Menu
+                key='menu-list'
+                id="main-menu"
                 anchorEl={this.state.anchorEl}
                 open={this.state.open}
                 onRequestClose={this.handleRequestClose}
@@ -113,7 +115,7 @@ class LeftMenu extends React.Component<Props, State>{
                 <MenuItem onClick={this.navClick(basePath )}>Home</MenuItem>
                 <MenuItem onClick={this.navClick(basePath + 'appinfo')}>Demo Home</MenuItem>
                 <MenuItem onClick={this.navClick(basePath + 'products')}>Products</MenuItem>
-              </Menu></div>)
+              </Menu>]
     ;
   }
 }
