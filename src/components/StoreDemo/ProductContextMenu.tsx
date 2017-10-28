@@ -77,8 +77,8 @@ const styles = theme => ({
     flex: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    position: 'absolute' as 'absolute',
+    right: 0
   },
 });
 
@@ -123,7 +123,7 @@ class ProductContextMenu extends React.Component<Props, State>{
   render(){
     const {classes} = this.props;
 
-    return (<div><IconButton className={classes.menuButton}
+    return [<IconButton key='icon' className={classes.menuButton}
               aria-label="More"
               aria-owns={this.state.open ? 'contect-menu' : null}
               aria-haspopup="true"
@@ -131,9 +131,11 @@ class ProductContextMenu extends React.Component<Props, State>{
           >
               <MoreVertIcon />
 
-         </IconButton>
-                       <Menu
+              </IconButton>,
+
+              <Menu
                 id="contect-menu"
+                key='menu'
                 anchorEl={this.state.anchorEl}
                 open={this.state.open}
                 onRequestClose={this.handleRequestClose}
@@ -141,10 +143,10 @@ class ProductContextMenu extends React.Component<Props, State>{
 
                 }}
               >
-                <MenuItem>Add To Cart</MenuItem>
+                <MenuItem aria-owns={null} >Add To Cart</MenuItem>
                 <MenuItem>Reviews</MenuItem>
                 <MenuItem>Save for Later</MenuItem>
-              </Menu></div>)
+              </Menu>];
     ;
   }
 }
