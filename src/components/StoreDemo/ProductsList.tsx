@@ -89,7 +89,7 @@ export default class ProductsList extends React.Component<Props, State>{
   render(){
     const {products,cols/*page,lastPage,setPage,*/} = this.props;
 
-    return <GridList onClick={() => {}} cols={cols ? cols : 2} cellHeight={180}>
+    return <GridList cols={cols ? cols : 2} cellHeight={180}>
          {products.map(tile => {
            return  <GridListTile key={tile.id}>
             <img src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
