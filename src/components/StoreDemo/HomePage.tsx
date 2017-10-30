@@ -32,21 +32,28 @@
 import * as React from 'react';
 import {AppPageInterface} from '../Main';
 import Checkbox from 'material-ui-next/Checkbox';
+import {withStyles}from 'material-ui-next/styles';
 import { FormGroup, FormControlLabel } from 'material-ui-next/Form';
 export interface Props {
   appPage: AppPageInterface;
+  classes: any;
 }
 
+const styles = {
+  label: {
+    color: 'black'
+  }
+}
 
-export default class HomePage extends React.Component<Props, {}>{
+export class HomePage extends React.Component<Props, {}>{
 
   render(){
-    const {appPage} = this.props;
+    const {appPage,classes} = this.props;
     const versionChanged = appPage.version !== '0.0.0';
     return <div>
               <div>
                 <FormGroup row>
-                  <FormControlLabel control={<Checkbox checked={versionChanged} />} label={'Version: ' + appPage.version} />
+                  <FormControlLabel classes={classes} control={<Checkbox checked={versionChanged} />} label={'Version: ' + appPage.version} />
                 </FormGroup>
 
               
@@ -62,3 +69,5 @@ export default class HomePage extends React.Component<Props, {}>{
     </div>;
   }
 }
+
+export default withStyles(styles)(HomePage)

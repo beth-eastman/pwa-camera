@@ -33,6 +33,7 @@ import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import FavoriteCheckbox from '../FavoriteCheckBox';
 import { GridList, GridListTile, GridListTileBar } from 'material-ui-next/GridList';
+//import ButtonBase from 'material-ui-next/ButtonBase';
 import {AppPageInterface} from '../Main'
 export interface FavoriteProductInterface extends ProductInterface{
   isFavorite: boolean;
@@ -88,11 +89,12 @@ export default class ProductsList extends React.Component<Props, State>{
   render(){
     const {products,cols/*page,lastPage,setPage,*/} = this.props;
 
-    return <GridList cols={cols ? cols : 2} cellHeight={180}>
+    return <GridList onClick={() => {}} cols={cols ? cols : 2} cellHeight={180}>
          {products.map(tile => {
            return  <GridListTile key={tile.id}>
             <img src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
             <GridListTileBar
+
               title={tile.title}
               subtitle={<span>by: Someone</span>}
               actionIcon={

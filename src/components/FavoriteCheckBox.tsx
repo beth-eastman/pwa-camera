@@ -57,6 +57,6 @@ export default class FavoriteCheckbox extends React.Component<Props, State>{
     const icon = checked ? <ActionFavorite color={"yellow"} /> : <ActionFavoriteBorder color={"white"} />;
 
 
-    return  <IconButton onClick={this.handleToggle}>{icon}</IconButton>;
+    return  <IconButton aria-label="Add to favorites" onClick={this.handleToggle}>{icon}</IconButton>;
   }
 }

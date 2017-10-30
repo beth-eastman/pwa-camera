@@ -32,19 +32,23 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import {AppPageInterface} from '../Main';
-//import FavoriteCheckbox from '../FavoriteCheckBox';
+import FavoriteCheckbox from '../FavoriteCheckBox';
 import ProductContextMenu from './ProductContextMenu';
-import Card, { /*CardActions,*/ CardContent, CardMedia } from 'material-ui-next/Card';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui-next/Card';
 import Typography from 'material-ui-next/Typography';
 import {withStyles} from 'material-ui-next/styles';
+import ShareIcon from 'material-ui-icons/Share';
+import IconButton from 'material-ui-next/IconButton';
+
+
 //TODO re-implement overlay and favoriting feature
 const styles = {
   card: {
     maxWidth: 500,
+    margin: '10px auto 0px auto'
   },
   media: {
     height: 500,
-    width: 500
   },
 };
 
@@ -79,7 +83,7 @@ export class ProductDetails extends React.Component<Props, State>{
   }
 
   render(){
-    const {product, classes/*,isFavorite*/} = this.props;
+    const {product, classes,isFavorite} = this.props;
 
     //return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
     return   <Card className={classes.card}>
@@ -87,16 +91,10 @@ export class ProductDetails extends React.Component<Props, State>{
         className={classes.media}
         image={product.image}
         title={product.title}
-        // overlay={<CardTitle title={<div>${product.price}
-
-        //   <div style={{position: 'absolute',top: 10, right: 0}}>
-        //     <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
-        //   </div>
-        // </div>}  />}
       />
       <CardContent>
         <Typography type="headline" component="h2">
-          {product.title}
+          {product.title} ${product.price}
         </Typography>
         <Typography type="subheading" component="h4">
           By ACME
@@ -105,6 +103,14 @@ export class ProductDetails extends React.Component<Props, State>{
             {product.description}
         </Typography>
       </CardContent> 
+      <CardActions disableActionSpacing>
+        <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
+        <IconButton aria-label="Share">
+          <ShareIcon />
+        </IconButton>
+        <div className={classes.flexGrow} />
+
+      </CardActions>
     </Card>
   }
 }
