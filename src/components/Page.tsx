@@ -1,6 +1,7 @@
 /**
  * @file Page.tsx
- * Wrapper that passes functionality down to a component.
+ * This component is meant to wrap another component and implements common features for page views. It wraps arround another component
+ * so that said component does not need to implement any interfaces
  *
  * Created by T2 on 08/22/2017
  *
@@ -69,7 +70,7 @@ export default class Page extends React.Component<Props, State>{
     if(typeof tab !== 'undefined'){
       appPage.selectTab('someId',tab);
     }
-    console.log(titlePath);
+ 
     appPage.setTitlePath(titlePath);
 
 

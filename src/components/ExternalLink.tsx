@@ -1,6 +1,6 @@
 /**
  * @file ExternalLink.tsx
- * File handles external link navigation for Cordova apps.
+ * File handles external link navigation for both web and Cordova apps.
  *
  * Created by T2 on 08/22/2017
  *
@@ -39,13 +39,6 @@ export interface Props {
 export interface State {
 
 }
-//TODO this doesn work with react 16
-declare module 'react' { //See https://github.com/zilverline/react-tap-event-plugin/issues/58
-    interface HTMLProps<T> {
-        onTouchTap?: React.EventHandler<React.TouchEvent<T>>;
-    }
-}
-
 
 export default class ExternalLink extends React.Component<Props, State>{
 

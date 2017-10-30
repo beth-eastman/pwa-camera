@@ -1,6 +1,7 @@
 /**
  * @file MainContent.tsx
- * 
+ *
+ * This component implements the content area of the app including routes and global components
  *
  * Created by T2 on 08/22/2017
  *
