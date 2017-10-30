@@ -68,7 +68,6 @@ export default class SnackbarGlobal extends React.Component<Props, State>{
                   key="close"
                   aria-label="Close"
                   color="inherit"
-                 // className={classes.close}
                   onClick={this.handleOnclick}
                 >
                   <CloseIcon />

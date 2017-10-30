@@ -59,7 +59,7 @@ const styles = theme => ({
 //const appIcon = require("../res/images/ui/app_icon_48.png")
 
 export interface Props {
-  // class AppBar (defined below) will expect to be passed these properties
+ 
   leftIcon: JSX.Element,
   rightIcon: JSX.Element,
   title: string;
@@ -91,13 +91,12 @@ class AppBar extends React.Component<Props, State>{
 
 
   render(){
-    const {title, leftIcon/*,onTitleClick*/,rightIcon} = this.props;
-    console.log(rightIcon);
+    const {title, leftIcon,onTitleClick,rightIcon} = this.props;
     return    <MuiAppBar position="static" color="default">
         <Toolbar>
           {leftIcon}
 
-          <Typography type="title" color="inherit">
+          <Typography type="title" color="inherit" onClick={onTitleClick}>
             {getTitleIcon(title)}
           </Typography>
 

@@ -69,10 +69,9 @@ export default class Page extends React.Component<Props, State>{
     if(typeof tab !== 'undefined'){
       appPage.selectTab('someId',tab);
     }
+    console.log(titlePath);
+    appPage.setTitlePath(titlePath);
 
-    if(titlePath){
-       appPage.setTitlePath(titlePath);
-    }
 
     if(title){
         appPage.setPageTitle(title);

@@ -54,7 +54,7 @@ class StoreRoutes extends React.Component<Props, State>{
 
   render(){
     const basePath = '/';
-    const defaultProps = {...this.props, ...leftIconProps(basePath),basePath: basePath};
+    const defaultProps = {...this.props,basePath: basePath};
 
     const leftMenuIcon = menuItem(LeftMenuIcon,basePath);
 
