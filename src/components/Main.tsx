@@ -1,5 +1,8 @@
 /**
  * @file Main.tsx
+ *
+ * Provides common app-level information and functionality.
+ * 
  * Contains the AppPageInterface, an interface that can be passed onto components
  * or containers in order to access common properties or functions such as
  * the router or screen information.
@@ -97,18 +100,34 @@ export default class Main extends React.Component<Props, State>{
     }
   }
 
-  handleSetTabs = (tempTabs: JSX.Element[]) => {
+  /**
+   * Allows user to dynamically set tabs
+   * 
+   * @param  {JSX.Element} tabs - The tabs you want to show below the AppBar
+   * @return void     
+   */
+  handleSetTabs = (tabs: JSX.Element[]) => {
     this.setState({
-      tempTabs
+      tempTabs: tabs
     });
   }
-
+  /**
+   * Increments state.tabCount  which can be used by child components for optimization
+   * It is currently only used by ./RouteGroup
+   * 
+   * @return {void} 
+   */
   handleTabAdded = () => {
     this.setState({
       tabCount: this.state.tabCount + 1
     });
   }
-
+  /**
+   * Decrements state.tabCount  which can be used by child components for optimization
+   * It is currently only used by ./RouteGroup
+   * 
+   * @return {void} 
+   */
   handleTabRemoved = () => {
     if(this.state.tabCount){
       this.setState({
@@ -116,12 +135,24 @@ export default class Main extends React.Component<Props, State>{
       });
     }
   }
+
+  /**
+   * Is used by ./RouteGroup component to establish the primary tabs
+   * @param  {JSX.Element[]} mainTabs - The tabs added by RouteGroup component
+   * @return {void}
+   */
   handleDefaultTabs = (mainTabs: JSX.Element[]) => {
     this.setState({
       mainTabs
     });
   }
 
+  /**
+   * Called by other components to indicate which tab is currently selected/active
+   * @param  {string} - not currently in use
+   * @param  {number} tabId - the index of the current active tab
+   * @return {void}
+   */
   handleSelectTab = (tabsId: string | number,tabId:number) => {
     this.setState({
       tabsId,
@@ -129,14 +160,30 @@ export default class Main extends React.Component<Props, State>{
     });
   }
 
+  /**
+   * Allows child components to set the main icon which is usually the left-most icon in the AppBar
+   * @param  {JSX.Element} leftIcon - the icon to add
+   * @return {void}
+   */
   handleSetMainIcon = (leftIcon: JSX.Element) => {
     this.setState({leftIcon})
   }
-
+  /**
+   * Allows child components to set the right-most icon in the AppBar. 
+   * Alot of times this will be a contect menu
+   * 
+   * @param  {JSX.Element} rightIcon - the icon to add
+   * @return {void}
+   */
   handleSetRightIcon = (rightIcon: JSX.Element) => {
     this.setState({rightIcon})
   }
-
+  /**
+   * allows the user to set the path for when the title in the AppBar is clicked
+   * 
+   * @param  {string} titlePath - The string the will be passed to history.push(...)
+   * @return {void}
+   */
   handleSetTitlePath = (titlePath: string) => {
     this.setState({titlePath})
   }
@@ -145,6 +192,11 @@ export default class Main extends React.Component<Props, State>{
     this.handlePageResize();
   }
 
+
+  /**
+   * Gets the current screen dimensions. This will allow components to implement custom RWD
+   * @return {Object} A simple object containing the current width, height and orientation
+   */
   getScreenDimensions = () => {
     const orientation = window.innerWidth >= window.innerHeight ? 'landscape' : 'portrait';
 
@@ -155,6 +207,13 @@ export default class Main extends React.Component<Props, State>{
     }
   }
 
+  /**
+   * Handles the behavior for with the AppBar title is clicked. If state.titlePath is not empty
+   * the user will be navigated via history.push
+   * 
+   * @param  {Event} event - A standard click event object
+   * @return {void}
+   */
   handleTitleClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -165,6 +224,13 @@ export default class Main extends React.Component<Props, State>{
     }
   }
 
+
+  /**
+   * Detects whether any change in dimension has occured. This is used to preven unecessary
+   * rendering
+   * 
+   * @return {boolean}
+   */
   hasScreenChanged = () => {
     const {width, height} = this.state.screen;
     const currentDims = this.getScreenDimensions();
@@ -177,6 +243,13 @@ export default class Main extends React.Component<Props, State>{
     }
     return false;
   }
+
+  /**
+   * Establishes the a listener for the onresize event so that child components that implement
+   * RWD and respond appropriately
+   *
+   * @returns {void}
+   */
 
   handlePageResize = () => {
     let resizeTimeoutId = null;
@@ -201,6 +274,12 @@ export default class Main extends React.Component<Props, State>{
 
     }
   }
+
+  /**
+   * This function returns on object that implements the AppPageInterface
+   * @return {AppPageInterface}
+   */
+  
   getAppPageObject = ():AppPageInterface => {
     const {setPageTitle,history} = this.props;
     return {

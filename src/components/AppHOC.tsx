@@ -102,7 +102,7 @@ export const menuItem = (WrappedComponent,basePath:string = '/') => {
  * Just a convenience function to provide a standard back icon.
  * Mainly for use in the AppBar "leftIcon" property
  * 
- * @param  {String} path - the path to the back page
+ * @param  {string} path - the path to the back page
  * @return {JSX.Element} the back ui component
  */
 export const backIcon = (path:string = '/') => {

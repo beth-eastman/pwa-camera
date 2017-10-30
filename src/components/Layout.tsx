@@ -1,5 +1,5 @@
 /**
- * @file MainTabs.tsx
+ * @file Layout.tsx
  * Renders the AppBar, Tabs, and Main content for the application.
  *
  * Created by T2 on 08/22/2017
@@ -54,7 +54,7 @@ export interface State {
 
 }
 
-export default class MainTabs extends React.Component<any,any> {
+export default class Layout extends React.Component<any,any> {
 
   handleChange = (event, value) => {
     const {appPage} = this.props;
