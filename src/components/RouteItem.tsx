@@ -45,6 +45,7 @@ export interface Props {
   exact?: boolean;
   tab?: number;
   bnav?: number;
+  bnavIcon?: React.ReactNode;
   bnavIndex?: number;
   titlePath?: string;
   componentPage?: React.ReactNode;

@@ -35,9 +35,8 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-//const loadLayout = require('bundle-loader?lazy!./Layout');
-import Layout from './Layout';
-//import Bundle from './Bundle';
+const loadLayout = require('bundle-loader?lazy!./Layout');
+import Bundle from './Bundle';
 import LeftMenuIcon from './LeftMenuIcon';
 
 export interface AppPageInterface {
@@ -218,7 +217,6 @@ export default class Main extends React.Component<Props, State>{
       bottomNavigations: navigations,
       bnavId: 'user'
     });
-    //this.setBottomNavigations();
   }
 
   /**
@@ -234,17 +232,6 @@ export default class Main extends React.Component<Props, State>{
       bnavId: 'default',
       bottomNavigations: []
     });
-    //this.setBottomNavigations();
-  }
-
-  setBottomNavigations = () => {
-    // console.log(this.state.bottomNavigations);
-    // console.log(this.state.mainBottomNavigations);
-    // const bnavigations = typeof this.state.bottomNavigations !== 'undefined' ? this.state.bottomNavigations : this.state.mainBottomNavigations;
-    // console.log(bnavigations);
-    // this.setState({
-    //   bnavigations
-    // });
   }
 
   handleSetDefaultBottomNavigation = () => {
@@ -384,6 +371,10 @@ export default class Main extends React.Component<Props, State>{
     //     }}
     // </Bundle>
     //async loading
-    return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />;
+    return <Bundle load={loadLayout} >
+      {(Layout) => {
+          return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />
+        }}
+    </Bundle>
   }
 }

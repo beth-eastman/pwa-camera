@@ -40,7 +40,9 @@ import ProductsList from '../../containers/StoreDemo/ProductsList';
 import RouteGroup from '../RouteGroup';
 import RouteItem from '../RouteItem';
 import MainHomePage from '../HomePage';
-
+import HomeIcon from 'material-ui-icons/Home';
+import InfoIcon from 'material-ui-icons/Info';
+import StoreIcon from 'material-ui-icons/Store';
 export interface Props {
   appPage: AppPageInterface;
   match: {url: string}
@@ -59,10 +61,10 @@ class StoreRoutes extends React.Component<Props, State>{
     const leftMenuIcon = menuItem(LeftMenuIcon,basePath);
 
     return <RouteGroup defaultProps={defaultProps} appPage={this.props.appPage}>
-          <RouteItem bnav={0} title={'Home'} exact path="/" leftIcon={leftMenuIcon} componentPage={MainHomePage} />
-          <RouteItem bnav={1} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
-          <RouteItem bnav={2} title={"Products"}  exact path={'/products'} leftIcon={leftMenuIcon} componentPage={ProductsList} />
-          <RouteItem bnavIndex={2} title={"Details"} exact path={'/products/:id'} {...leftIconProps('/products')} componentPage={ProductDetails} />
+          <RouteItem tab={0} bnav={0} bnavIcon={<HomeIcon />} title={'Home'} exact path="/" leftIcon={leftMenuIcon} componentPage={MainHomePage} />
+          <RouteItem tab={1} bnav={1} bnavIcon={<InfoIcon/>} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
+          <RouteItem tab={2} bnav={2} bnavIcon={<StoreIcon />} title={"Products"}  exact path={'/products'} leftIcon={leftMenuIcon} componentPage={ProductsList} />
+          <RouteItem tabIndex={2} bnavIndex={2} title={"Details"} exact path={'/products/:id'} {...leftIconProps('/products')} componentPage={ProductDetails} />
      </RouteGroup>;
   }
 }

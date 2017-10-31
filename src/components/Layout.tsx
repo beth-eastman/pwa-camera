@@ -35,8 +35,16 @@ import MainContent from './MainContent';
 import {AppPageInterface} from './Main';
 import AppBar from '../containers/AppBar';
 import BottomNavigation from 'material-ui-next/BottomNavigation';
+import {withStyles} from 'material-ui-next/styles';
 
 
+const styles = {
+  bottomNavigation: {
+    position: 'fixed' as 'fixed',
+    bottom: 0,
+    width: '100%'
+  }
+}
 export interface Props {
   setPageTitle(title:string): void;
   screen:{width: number, height: number,orientation: string}
@@ -52,13 +60,14 @@ export interface Props {
   onTitleClick: (event: any) => void;
   mainTabs: JSX.Element[];
   bnavigations: JSX.Element[] | undefined
+  classes?: any;
 }
 
 export interface State {
 
 }
 
-export default class Layout extends React.Component<any,any> {
+export class Layout extends React.Component<any,any> {
 
   handleTabChange = (event, value) => {
     const {appPage} = this.props;
@@ -67,6 +76,7 @@ export default class Layout extends React.Component<any,any> {
 
   render() {
     console.log(this.props.bnavId);
+    const {classes} = this.props;
     const defaultProps = {...this.props,basePath: '/',mainTabs: undefined};
     const tabs = typeof this.props.tempTabs !== 'undefined' ? this.props.tempTabs : this.props.mainTabs;
 
@@ -74,16 +84,16 @@ export default class Layout extends React.Component<any,any> {
     return (
       <div>
         <AppBar rightIcon={this.props.rightIcon} defaultTitle={this.props.title}  leftIcon={this.props.leftIcon} onTitleClick={this.props.onTitleClick} />
-        <Tabs
+        {tabs && tabs.length > 0 && <Tabs
           value={this.props.tabId}
           onChange={this.handleTabChange}
           children={tabs}
           fullWidth
-        />
+        />}
         <MainContent {...defaultProps} />
 
 
-        {bnavigations.length > 0 && <BottomNavigation
+        {bnavigations.length > 0 && <BottomNavigation className={classes.bottomNavigation}
           value={this.props.bottomNavigationId}
   
           showLabels
@@ -95,3 +105,5 @@ export default class Layout extends React.Component<any,any> {
     );
   }
 }
+
+export default withStyles(styles)(Layout);
