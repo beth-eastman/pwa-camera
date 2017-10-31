@@ -118,20 +118,32 @@ things tidy.
 #### src/components/RouteItem.tsx
 
 RouteItem simply adds some features to the react-route v4 Route object. Plus adds some "goodies"
-like creating tabs, hightlighting tabs, setting the title on for the app bar.
+like creating tabs, hightlighting tabs, bottom navigation menues, setting the title on for the app bar.
 
 For example an app that has 3 routes and two tabs could be implemented with the code below.
 
 ```jsx
   <RouteGroup defaultProps={{title: 'Demo App!'}}>
     <RouteItem tab={0} title={"Home"} path="/" componentPage={<HomeComponent />} />
-    <RouteItem tab={1} title={"Products"}exact path="/products" componentPage={<ProductsList />} />
+    <RouteItem tab={1} title={"Products"} exact path="/products" componentPage={<ProductsList />} />
     <RouteItem tabIndex={1} title={"Settings"} exact path="/product/:id" componentPage={<SettingsComponent />} />
   </RouteGroup>
 ```
 The first two RouteItems create a tab merely by including a **tab** property and the desired tab index.
 However notice that the 3rd route doesn't create a tab BUT when this route is active the "Products" tab will be 
 active because we've included the **tabIndex** property which is passed an index number corresponding to the "Products" tab.
+
+Instead of or in addition to having tabs you can set your bottom navigation using RouteItems.
+
+```jsx
+<RouteGroup defaultProps={defaultProps} appPage={this.props.appPage}>
+          <RouteItem bnav={0} bnavIcon={<HomeIcon />} title={'Home'} exact path="/" leftIcon={leftMenuIcon} componentPage={MainHomePage} />
+          <RouteItem bnav={1} bnavIcon={<InfoIcon/>} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
+          <RouteItem bnav={2} bnavIcon={<StoreIcon />} title={"Products"}  exact path={'/products'} componentPage={ProductsList} />
+          <RouteItem bnavIndex={2} title={"Details"} exact path={'/products/:id'} componentPage={ProductDetails} />
+</RouteGroup>
+```
+The bottom navigation items work in a very similar manner to tabs.
 
 **Please keep in mind that if you are more comfortable using react-router v4 the standard way you won’t break the app by not using these components.**
 
