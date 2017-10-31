@@ -34,6 +34,8 @@ import Tabs from 'material-ui-next/Tabs';
 import MainContent from './MainContent';
 import {AppPageInterface} from './Main';
 import AppBar from '../containers/AppBar';
+import BottomNavigation from 'material-ui-next/BottomNavigation';
+
 
 export interface Props {
   setPageTitle(title:string): void;
@@ -45,9 +47,11 @@ export interface Props {
   titlePath: string;
   appPage: AppPageInterface;
   tabId: number;
+  bottomNavigationId: number;
   tabsId: string | number;
   onTitleClick: (event: any) => void;
-  mainTabs: JSX.Element[]
+  mainTabs: JSX.Element[];
+  bnavigations: JSX.Element[] | undefined
 }
 
 export interface State {
@@ -56,25 +60,37 @@ export interface State {
 
 export default class Layout extends React.Component<any,any> {
 
-  handleChange = (event, value) => {
+  handleTabChange = (event, value) => {
     const {appPage} = this.props;
     appPage.selectTab(null,value);
   }
 
   render() {
-
+    console.log(this.props.bnavId);
     const defaultProps = {...this.props,basePath: '/',mainTabs: undefined};
     const tabs = typeof this.props.tempTabs !== 'undefined' ? this.props.tempTabs : this.props.mainTabs;
+
+    const bnavigations = this.props.bnavId === 'user' ? this.props.bottomNavigations : this.props.mainBottomNavigations;
     return (
       <div>
         <AppBar rightIcon={this.props.rightIcon} defaultTitle={this.props.title}  leftIcon={this.props.leftIcon} onTitleClick={this.props.onTitleClick} />
         <Tabs
           value={this.props.tabId}
-          onChange={this.handleChange}
+          onChange={this.handleTabChange}
           children={tabs}
           fullWidth
         />
         <MainContent {...defaultProps} />
+
+
+        {bnavigations.length > 0 && <BottomNavigation
+          value={this.props.bottomNavigationId}
+  
+          showLabels
+        >
+          {bnavigations}
+        </BottomNavigation>}
+
       </div>
     );
   }

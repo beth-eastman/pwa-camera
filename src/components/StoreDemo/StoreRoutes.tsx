@@ -59,10 +59,10 @@ class StoreRoutes extends React.Component<Props, State>{
     const leftMenuIcon = menuItem(LeftMenuIcon,basePath);
 
     return <RouteGroup defaultProps={defaultProps} appPage={this.props.appPage}>
-          <RouteItem tab={0} title={'Home'} exact path="/" leftIcon={leftMenuIcon} componentPage={MainHomePage} />
-          <RouteItem tab={1} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
-          <RouteItem tab={2} title={"Products"}  exact path={'/products'} leftIcon={leftMenuIcon} componentPage={ProductsList} />
-          <RouteItem tabIndex={2} title={"Details"} exact path={'/products/:id'} {...leftIconProps('/products')} componentPage={ProductDetails} />
+          <RouteItem bnav={0} title={'Home'} exact path="/" leftIcon={leftMenuIcon} componentPage={MainHomePage} />
+          <RouteItem bnav={1} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
+          <RouteItem bnav={2} title={"Products"}  exact path={'/products'} leftIcon={leftMenuIcon} componentPage={ProductsList} />
+          <RouteItem bnavIndex={2} title={"Details"} exact path={'/products/:id'} {...leftIconProps('/products')} componentPage={ProductDetails} />
      </RouteGroup>;
   }
 }

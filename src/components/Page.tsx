@@ -40,6 +40,7 @@ export interface Props {
   titlePath?: string; //the path navigated to when appbar title is clicked
   title?: string;
   tab?: number;
+  bnav?: number;
   tabs?: JSX.Element[];
   defaultTabs?: JSX.Element[];
 }
@@ -61,7 +62,7 @@ export default class Page extends React.Component<Props, State>{
 
 
   componentWillMount(){
-    const {appPage,leftIcon,titlePath,title,rightIcon,tab} = this.props;
+    const {appPage,leftIcon,titlePath,title,rightIcon,tab,bnav} = this.props;
 
     appPage.setRightIcon(rightIcon);
 
@@ -69,6 +70,10 @@ export default class Page extends React.Component<Props, State>{
 
     if(typeof tab !== 'undefined'){
       appPage.selectTab('someId',tab);
+    }
+
+    if(typeof bnav !== 'undefined'){
+      appPage.setBottomNavigationId(bnav);
     }
  
     appPage.setTitlePath(titlePath);
@@ -83,6 +88,10 @@ export default class Page extends React.Component<Props, State>{
   componentWillUnmount(){
      const {appPage} = this.props;
      appPage.setTabs(undefined);
+     if(appPage.bnavId !== 'default'){
+       appPage.setBottomNavigatioDefaults();
+     }
+     
   }
 
   render(){

@@ -36,6 +36,8 @@
 import * as React from 'react';
 
 import {Tab} from 'material-ui-next/Tabs';
+import { BottomNavigationButton } from 'material-ui-next/BottomNavigation';
+import RestoreIcon from 'material-ui-icons/Restore';
 import {AppPageInterface} from './Main';
 
 export interface Props {
@@ -72,6 +74,14 @@ export default class RouteGroup extends React.Component<Props,any> {
     }
   }
 
+  handleBottomNavigationActive = (path) => {
+    const {appPage, onActive} = this.props;
+    return (bottomNav) => {
+      appPage.history.push(path);
+      onActive && onActive(bottomNav, path);
+    }
+  }
+
 
   handleCreateTabs = () => {
     const {appPage} = this.props;
@@ -86,13 +96,37 @@ export default class RouteGroup extends React.Component<Props,any> {
     appPage.setDefaultTabs(tabs);
     appPage.tabAdded();
   }
+  handleBottomNavigationButtonClick = (path) => {
+    const {appPage} = this.props;
+
+    return (event) => {
+      appPage.history.push(path);
+    }
+  }
+  handleCreateBottomNavigation = () => {
+    const {appPage} = this.props;
+    let bnavigations = [];
+
+    this.props.children
+      .filter((child) => typeof child.props['bnav'] !== 'undefined')
+      .map((child, idx) => {
+        bnavigations.push(<BottomNavigationButton onClick={this.handleBottomNavigationButtonClick(child.props.path)} icon={<RestoreIcon />} label={child.props.title} value={idx} key={idx} />);
+      });
+    //console.log(bnavigations);
+    appPage.setMainBottomNavigation(bnavigations);
+  }
+
+
+
   componentWillMount(){
     this.handleCreateTabs();
+    this.handleCreateBottomNavigation();
   }
 
   componentWillUnmount(){
     const {appPage} = this.props;
     appPage.setDefaultTabs([]);
+    appPage.setMainBottomNavigation([]);
     appPage.tabRemoved();
   }
 

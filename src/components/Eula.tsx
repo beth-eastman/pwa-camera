@@ -72,7 +72,7 @@ export class Eula extends React.Component<MyProps, MyState> {
 
   render(){
     const {accept,reject,eulaAccepted,hideRejectButton,classes} = this.props;
-    console.log(classes);
+   
     let actions = [
       <Button
         color="primary"

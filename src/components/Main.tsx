@@ -35,8 +35,9 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-const loadLayout = require('bundle-loader?lazy!./Layout');
-import Bundle from './Bundle';
+//const loadLayout = require('bundle-loader?lazy!./Layout');
+import Layout from './Layout';
+//import Bundle from './Bundle';
 import LeftMenuIcon from './LeftMenuIcon';
 
 export interface AppPageInterface {
@@ -54,6 +55,11 @@ export interface AppPageInterface {
   tabCount: number;
   tabRemoved: () => void;
   tabAdded: () => void;
+  setBottomNavigation: (navigations: JSX.Element[]) => void;
+  setMainBottomNavigation: (navigations: JSX.Element[]) => void;
+  setBottomNavigationId: (navId: number) => void;
+  setBottomNavigatioDefaults: () => void;
+  bnavId: string;
 }
 
 export interface Props {
@@ -77,6 +83,11 @@ export interface State {
   mainTabs: JSX.Element[];
   tempTabs: JSX.Element[] | undefined;
   tabCount: number;
+  bottomNavigationId: number;
+  bottomNavigations: JSX.Element[] | undefined;
+  mainBottomNavigations: JSX.Element[] | undefined;
+  bnavigations: JSX.Element[],
+  bnavId: string;
 }
 
 export default class Main extends React.Component<Props, State>{
@@ -96,10 +107,17 @@ export default class Main extends React.Component<Props, State>{
       tabId: 0,
       mainTabs: [],
       tempTabs: undefined,
-      tabCount: 0
+      tabCount: 0,
+      bottomNavigationId: 0,
+      mainBottomNavigations:[],
+      bottomNavigations: [],
+      bnavigations: [],
+      bnavId: 'default'
     }
   }
 
+
+  
   /**
    * Allows user to dynamically set tabs
    * 
@@ -188,9 +206,64 @@ export default class Main extends React.Component<Props, State>{
     this.setState({titlePath})
   }
 
+  /**
+   * Allows user to dynamically set bottom nav items
+   * 
+   * @param  {JSX.Element} tabs - The tabs you want to show below the AppBar
+   * @return void     
+   */
+  handleSetBottomNavigation = (navigations: JSX.Element[]) => {
+    console.log(navigations);
+    this.setState({
+      bottomNavigations: navigations,
+      bnavId: 'user'
+    });
+    //this.setBottomNavigations();
+  }
+
+  /**
+   * Allows Router System to set bottom navigations
+   * 
+   * @param  {JSX.Element} tabs - The tabs you want to show below the AppBar
+   * @return void     
+   */
+  handleSetMainBottomNavigation = (navigations: JSX.Element[]) => {
+    console.log(navigations);
+    this.setState({
+      mainBottomNavigations: navigations,
+      bnavId: 'default',
+      bottomNavigations: []
+    });
+    //this.setBottomNavigations();
+  }
+
+  setBottomNavigations = () => {
+    // console.log(this.state.bottomNavigations);
+    // console.log(this.state.mainBottomNavigations);
+    // const bnavigations = typeof this.state.bottomNavigations !== 'undefined' ? this.state.bottomNavigations : this.state.mainBottomNavigations;
+    // console.log(bnavigations);
+    // this.setState({
+    //   bnavigations
+    // });
+  }
+
+  handleSetDefaultBottomNavigation = () => {
+    this.setState({
+      bottomNavigations: [],
+      bnavId: 'default'
+    });
+  }
+
+  handleSetBottomNavigationId = (bNavId: number) => {
+    this.setState({
+      bottomNavigationId: bNavId
+    });
+  }
+
   componentDidMount(){
     this.handlePageResize();
   }
+
 
 
   /**
@@ -218,7 +291,7 @@ export default class Main extends React.Component<Props, State>{
     event.preventDefault();
     event.stopPropagation();
     const {history} = this.props;
-    console.log(this.state.titlePath);
+
     if(this.state.titlePath){
       history.push(this.state.titlePath);
     }
@@ -296,16 +369,21 @@ export default class Main extends React.Component<Props, State>{
       sendMessage: this.props.sendMessage,
       tabAdded: this.handleTabAdded,
       tabRemoved: this.handleTabRemoved,
-      tabCount: this.state.tabCount
+      tabCount: this.state.tabCount,
+      setBottomNavigation: this.handleSetBottomNavigation,
+      setMainBottomNavigation: this.handleSetMainBottomNavigation,
+      setBottomNavigationId: this.handleSetBottomNavigationId,
+      setBottomNavigatioDefaults: this.handleSetDefaultBottomNavigation,
+      bnavId: this.state.bnavId
     }
   }
   render(){
-
+    // return <Bundle load={loadLayout} >
+    //   {(Layout) => {
+    //       return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />
+    //     }}
+    // </Bundle>
     //async loading
-    return <Bundle load={loadLayout} >
-      {(Layout) => {
-          return <Layout appPage={this.getAppPageObject()} {...this.state} onTitleClick={this.handleTitleClick} />
-        }}
-    </Bundle>
+    return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />;
   }
 }
