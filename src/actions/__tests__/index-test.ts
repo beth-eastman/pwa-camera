@@ -45,7 +45,7 @@ describe("Index actions tests",() => {
   /**
    * Standard redux actions are trivial so I'm lumping them into one test
    */
-  it('Tests all simple actions return correct objects',() => {
+  it('Tests that all simple redux actions return correct objects',() => {
 
      expect(eulaAccepted()).toEqual({type: EULA_ACCEPTED});
      expect(setUserPlatform('marklar')).toEqual({type: SET_USER_PLATFORM,platform: 'marklar'});
