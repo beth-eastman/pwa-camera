@@ -65,6 +65,8 @@ export class Eula extends React.Component<MyProps, MyState> {
     this.state = {suppressOpen: true};
   }
   componentDidMount(){
+    //This delay allows for data rehydration before checking if the 
+    //User has accepted the EULA
     setTimeout(() => {
       this.setState({suppressOpen: false});
     },1000);
@@ -81,6 +83,7 @@ export class Eula extends React.Component<MyProps, MyState> {
       >Accept</Button>
     ];
 
+    //On iOS and Web this is hidden
     if(!hideRejectButton){
       actions.push(<Button
             key='rejectbtn'
@@ -94,10 +97,7 @@ export class Eula extends React.Component<MyProps, MyState> {
 
         <Dialog
           title="EULA"
-          //modal={false}
           open={!eulaAccepted && !this.state.suppressOpen}
-          //contentStyle={fullWidthDialagStyle}
-          //autoScrollBodyContent={true}
         >
           <DialogTitle>{eula.title}</DialogTitle>
           <DialogContent>

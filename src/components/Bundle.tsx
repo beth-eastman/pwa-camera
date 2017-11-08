@@ -1,7 +1,7 @@
 /**
  * @file Bundle.tsx
  * 
- * This component is used to allow for async loading for components. 
+ * This component is used to allow for async loading/code-splitting for components. 
  * For examples see:
  *
  * ./Main.tsx and ./MainContent.tsx

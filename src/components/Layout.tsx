@@ -67,6 +67,13 @@ export interface State {
 
 }
 
+/**
+ * Layout assessmebles all the primary elements of the app including the
+ * AppBar, Navigation(Tabs and or Bottom Navigation), and page Content.
+ *
+ * Tabs and or Bottom Navigations are create using RouteItem and RouteGroup
+ * @see StoreDemo/StoreRoutes.tsx
+ */
 export class Layout extends React.Component<any,any> {
 
   handleTabChange = (event, value) => {
@@ -75,7 +82,7 @@ export class Layout extends React.Component<any,any> {
   }
 
   render() {
-    console.log(this.props.bnavId);
+
     const {classes} = this.props;
     const defaultProps = {...this.props,basePath: '/',mainTabs: undefined};
     const tabs = typeof this.props.tempTabs !== 'undefined' ? this.props.tempTabs : this.props.mainTabs;
@@ -90,8 +97,8 @@ export class Layout extends React.Component<any,any> {
           children={tabs}
           fullWidth
         />}
-        <MainContent {...defaultProps} />
 
+        <MainContent {...defaultProps} />
 
         {bnavigations.length > 0 && <BottomNavigation className={classes.bottomNavigation}
           value={this.props.bottomNavigationId}

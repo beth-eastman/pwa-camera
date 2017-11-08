@@ -92,10 +92,9 @@ export default class ProductsList extends React.Component<Props, State>{
     return <GridList cols={cols ? cols : 2} cellHeight={180}>
          {products.map(tile => {
            return  <GridListTile key={tile.id}>
-            <img src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
+            <img style={{cursor: 'pointer'}} src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
             <GridListTileBar
-
-              title={tile.title}
+              title={<span style={{cursor: 'pointer'}} onClick={this.handleItemClick(tile)}>{tile.title}</span>}
               subtitle={<span>by: Someone</span>}
               actionIcon={
                 <FavoriteCheckbox toggleFavorite={this.handleToggleFavorite(tile)} checked={tile.isFavorite} />

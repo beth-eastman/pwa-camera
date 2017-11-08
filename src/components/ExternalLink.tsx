@@ -40,6 +40,9 @@ export interface State {
 
 }
 
+/**
+ * Wrap this Element around anything you want to be an external link
+ */
 export default class ExternalLink extends React.Component<Props, State>{
 
   static defaultProps: Partial<Props> = {

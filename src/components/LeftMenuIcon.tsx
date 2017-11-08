@@ -30,38 +30,14 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-//import IconMenu from 'material-ui-next/IconMenu';
-
-//import Menu, { MenuItem } from 'material-ui-next/Menu';
 import IconButton from 'material-ui-next/IconButton';
-// import { Link } from 'react-router-dom';
-
 import MenuIcon from 'material-ui-icons/Menu';
-// import { withStyles } from 'material-ui-next/styles';
-// const styles = theme => ({
-//   root: {
-//     marginTop: theme.spacing.unit * 3,
-//     width: '100%',
-//   },
-//   flex: {
-//     flex: 1,
-//   },
-//   menuButton: {
-//     marginLeft: -12,
-//     marginRight: 20,
-//   },
-// });
-    // <IconMenu
 
-    //   iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-    //   anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-    //   targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    // >
-    //   <MenuItem containerElement={<Link to="/" />} primaryText="Home" />
-    //   <MenuItem containerElement={<Link to="/store" />} primaryText="Store Demo" />
-    // </IconMenu>
+/**
+ * Currenty this just a stateless functional component which displays an icon. There is no functionality yet.
+ * @type {Function}
+ */
 const LeftMenuMain = ():React.ReactElement<any> => {
-  //className={classes.menuButton} 
   return (
     <IconButton color="contrast" aria-label="Menu">
       <MenuIcon />

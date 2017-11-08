@@ -42,6 +42,13 @@ export interface Props {
 export interface State {
 
 }
+
+/**
+ * AppRoutes is simply a component with one route which points to the Demo <StoreRoutes />
+ *
+ * The user can add more routes in this file.
+ */
+
 class AppRoutes extends React.Component<Props, State>{
 
 

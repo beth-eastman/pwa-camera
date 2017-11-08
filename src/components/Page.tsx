@@ -47,7 +47,7 @@ export interface Props {
 
 
 export interface State {
-
+  hasError: boolean;
 }
 
 export default class Page extends React.Component<Props, State>{
@@ -60,7 +60,12 @@ export default class Page extends React.Component<Props, State>{
     defaultTabs: []
   }
 
-
+  constructor(props){
+    super(props);
+    this.state = {
+      hasError: false
+    }
+  }
   componentWillMount(){
     const {appPage,leftIcon,titlePath,title,rightIcon,tab,bnav} = this.props;
 
@@ -85,6 +90,14 @@ export default class Page extends React.Component<Props, State>{
 
   }
 
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
+    console.log(error);
+    console.log(info);
+  }
+
   componentWillUnmount(){
      const {appPage} = this.props;
      appPage.setTabs(undefined);
@@ -95,6 +108,9 @@ export default class Page extends React.Component<Props, State>{
   }
 
   render(){
+    if(this.state.hasError){
+      return <h3>Cannot Load this Page</h3>;
+    }
     return <div>
              {this.props.children}
            </div>;

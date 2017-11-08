@@ -39,25 +39,130 @@ const loadLayout = require('bundle-loader?lazy!./Layout');
 import Bundle from './Bundle';
 import LeftMenuIcon from './LeftMenuIcon';
 
+/**
+ * This interface defines the api through which child components can do things like set
+ * the page title, create/remove tabs, display Snackbar messages, etc.
+ */
 export interface AppPageInterface {
+  /**
+   * screen - Provides basic information on the current device screen size and orientation.
+   *
+   * Developers and us this info for RWD
+   * 
+   * @type {Object}
+   */
   screen:{width: number, height: number, orientation: string};
+  /**
+   * setMainIcon sets the top Left icon of the AppBar
+   * 
+   * @param  {JSX.Element} icon
+   */
   setMainIcon(icon: JSX.Element): void;
+  /**
+   * setRightIcon sets the top right icon of the AppBar. 
+   *
+   * Often this is used to create a context menu
+   * 
+   * @param {JSX.Element} icon
+   */
   setRightIcon(icon: JSX.Element): void;
+  /**
+   * Allow child elements to set the page title
+   * 
+   * @param {string} title - The page title
+   */
   setPageTitle(title:string): void;
+
+  /**
+   * setTitlePath Establishes which path is navigated when a user clicks/taps the AppBar title
+   * If it is not set then clicking/tapping on the title is a noop
+   * 
+   * @param {string} titlePath - the route 
+   */
   setTitlePath(titlePath:string):void;
-  selectTab(tabsId: string | number, tabId:number): void;
+
+  /**
+   * Sets the active tab
+   * This function is typically called automatically by the ./Page.tsx component
+   * 
+   * @param {string} tabsId - not Currently in use
+   * @param {string} tabId - The "id" or "index" for the tab you want activate
+   */
+  selectTab(tabsId: string | number, tabIndex:number): void;
+  /**
+   * This object is furnished by the react-router-dom module
+   * and provides methods with which to navigate throughout the app
+   *
+   * For example see the handleTitleClick method below wich uses push.
+   * 
+   * @type {object}
+   */
   history: any;
+
+  /**
+   * Idealy this would be set to the semver version of the app which
+   * is helpful for debugging and ensuring when a new version has been release on an app store.
+   * It is set in <root>/app.config.js
+   */
   version: string;
+
+  /**
+   * setTabs - Allow the user to set the navigation tabs which appear just below the AppBar.
+   *
+   * setting tabs this will will override any Tabs created by setDefaultTabs
+   * 
+   * @param  {JSX.Element[]} tabs - An array of tab elements
+   */
   setTabs: (tabs: JSX.Element[]) => void;
+  /**
+   * setDefaultTabs  - This method esablishes the default/primary navigation tabs
+   *
+   * @param  {JSX.Element[]} tabs - An array of tab elements
+   */
   setDefaultTabs: (tabs: JSX.Element[]) => void;
+  /**
+   * sendMessage - calling this with a string argument will cause a SnackBar notification to appear.
+   *
+   * @example <root>/src/components/StoreDemo/ProductDetails.tsx
+   * @param {string} title
+   */
   sendMessage(title:string): void;
+  /* used internally */
   tabCount: number;
+  /* used internally */
   tabRemoved: () => void;
+  /* used internally */
   tabAdded: () => void;
+  /**
+   * Allows the user to dynamically set the bottom navigation items. This will override
+   * bottom navs set by setMainBottomNavigation
+   *
+   * @param {JSX.Element[]} navigations - An array of bottom navigation items
+   */
   setBottomNavigation: (navigations: JSX.Element[]) => void;
+  /**
+   * Used by other components like ./RouteGroup to establish the default bottom navigation items
+   * 
+   */
   setMainBottomNavigation: (navigations: JSX.Element[]) => void;
-  setBottomNavigationId: (navId: number) => void;
+  /**
+   * sets the current active bottom navigation element. 
+   *
+   * This is mostly an internal function used by ./Page.tsx but could also be used to dynamically
+   * set the active navigation item.
+   */
+  setBottomNavigationId: (index: number) => void;
+
+  /**
+   * If applicable this will restore user defined tabs set by setBottomNavigation() with
+   * the tabs established by setMainBottomNavigation()
+   */
+
   setBottomNavigatioDefaults: () => void;
+  /**
+   * holds the current index value of the active buttom navigation item .
+   * @type {string}
+   */
   bnavId: string;
 }
 
@@ -365,12 +470,7 @@ export default class Main extends React.Component<Props, State>{
     }
   }
   render(){
-    // return <Bundle load={loadLayout} >
-    //   {(Layout) => {
-    //       return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />
-    //     }}
-    // </Bundle>
-    //async loading
+
     return <Bundle load={loadLayout} >
       {(Layout) => {
           return <Layout appPage={this.getAppPageObject()}  {...this.state} onTitleClick={this.handleTitleClick} />

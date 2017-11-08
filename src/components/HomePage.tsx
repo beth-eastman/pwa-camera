@@ -51,12 +51,12 @@ export default class Home extends React.Component<Props, State>{
 
 
   componentWillMount(){
+    //This is how you can set the page title dynamically
     this.props.appPage.setPageTitle("Home");
-
   }
 
   render(){
-    console.log(this.props);
+
     return <div>
                <h1>Under Construction</h1>
                
