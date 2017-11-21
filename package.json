@@ -12,7 +12,7 @@
     "serve": "node server.js"
   },
   "dependencies": {
-    "@types/jest": "^21.1.2",
+    "@types/jest": "^21.1.7",
     "@types/node": "^8.0.34",
     "@types/react": "^16.0.10",
     "@types/react-tap-event-plugin": "^0.0.30",
@@ -55,7 +55,7 @@
     "enzyme": "^3.1.1",
     "express": "^4.15.3",
     "jest": "^20.0.4",
-    "ts-jest": "^20.0.7",
+    "ts-jest": "^21.2.3",
     "typescript": "^2.4.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.8.1",
@@ -72,10 +72,11 @@
       "js"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/specs/"
+      "<rootDir>/specs/",
+      "<rootDir>/node_modules/"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/specs/preprocessor.js"
+      "^.+\\.tsx?$": "ts-jest"
     },
     "testMatch": [
       "**/__tests__/*.(ts|tsx|js)"
