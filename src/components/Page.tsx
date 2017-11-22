@@ -111,7 +111,7 @@ export default class Page extends React.Component<Props, State>{
     if(this.state.hasError){
       return <h3>Cannot Load this Page</h3>;
     }
-    return <div>
+    return <div style={{paddingBottom: 56}}>
              {this.props.children}
            </div>;
   }
