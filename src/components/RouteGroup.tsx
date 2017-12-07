@@ -35,8 +35,8 @@
  */
 import * as React from 'react';
 
-import {Tab} from 'material-ui-next/Tabs';
-import { BottomNavigationButton } from 'material-ui-next/BottomNavigation';
+import {Tab} from 'material-ui/Tabs';
+import { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import {AppPageInterface} from './Main';
 
 export interface Props {

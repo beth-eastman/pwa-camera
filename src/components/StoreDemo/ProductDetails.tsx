@@ -34,11 +34,11 @@ import {ProductInterface} from '../../res/data/products';
 import {AppPageInterface} from '../Main';
 import FavoriteCheckbox from '../FavoriteCheckBox';
 import ProductContextMenu from './ProductContextMenu';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui-next/Card';
-import Typography from 'material-ui-next/Typography';
-import {withStyles} from 'material-ui-next/styles';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import {withStyles} from 'material-ui/styles';
 import ShareIcon from 'material-ui-icons/Share';
-import IconButton from 'material-ui-next/IconButton';
+import IconButton from 'material-ui/IconButton';
 
 
 //TODO re-implement overlay and favoriting feature

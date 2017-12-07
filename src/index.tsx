@@ -30,7 +30,7 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import SvgIcon from 'material-ui-next/SvgIcon';
+import SvgIcon from 'material-ui/SvgIcon';
 (global as any).__MUI_SvgIcon__ = SvgIcon;
 import {compose, createStore,applyMiddleware} from 'redux';
 import {persistStore, autoRehydrate} from 'redux-persist';
@@ -43,7 +43,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './containers/Main';
-import { MuiThemeProvider,createMuiTheme} from 'material-ui-next/styles';
+import { MuiThemeProvider,createMuiTheme} from 'material-ui/styles';
 import reducer from './reducers';
 import {setUserPlatform} from './actions';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';

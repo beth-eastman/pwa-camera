@@ -31,11 +31,11 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import MuiAppBar from 'material-ui-next/AppBar';
-import Toolbar from 'material-ui-next/Toolbar';
-import Typography from 'material-ui-next/Typography';
-//import IconButton from 'material-ui-next/IconButton';
-import { withStyles } from 'material-ui-next/styles';
+import MuiAppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+//import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
 //import MenuIcon from 'material-ui-icons/Menu';
 //import {appBarTitleStyle, appBarIconeStyle} from './commonStyles';
 //const appIcon = require("../res/images/ui/app_icon_48.png")

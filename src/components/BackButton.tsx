@@ -33,7 +33,7 @@
 import * as React from 'react';
 
 import ArrowBack from 'material-ui-icons/ChevronLeft';
-import IconButton from 'material-ui-next/IconButton';
+import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
 
 const BackButton = ({path}) => {

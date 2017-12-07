@@ -32,8 +32,8 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import FavoriteCheckbox from '../FavoriteCheckBox';
-import { GridList, GridListTile, GridListTileBar } from 'material-ui-next/GridList';
-//import ButtonBase from 'material-ui-next/ButtonBase';
+import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
+//import ButtonBase from 'material-ui/ButtonBase';
 import {AppPageInterface} from '../Main'
 export interface FavoriteProductInterface extends ProductInterface{
   isFavorite: boolean;

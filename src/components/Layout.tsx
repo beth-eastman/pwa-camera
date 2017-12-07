@@ -30,12 +30,12 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Tabs from 'material-ui-next/Tabs';
+import Tabs from 'material-ui/Tabs';
 import MainContent from './MainContent';
 import {AppPageInterface} from './Main';
 import AppBar from '../containers/AppBar';
-import BottomNavigation from 'material-ui-next/BottomNavigation';
-import {withStyles} from 'material-ui-next/styles';
+import BottomNavigation from 'material-ui/BottomNavigation';
+import {withStyles} from 'material-ui/styles';
 
 
 const styles = {

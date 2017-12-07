@@ -30,8 +30,8 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Snackbar from 'material-ui-next/Snackbar';
-import IconButton from 'material-ui-next/IconButton';
+import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
 export interface Props {

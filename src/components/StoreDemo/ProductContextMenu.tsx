@@ -63,9 +63,9 @@
  */
 import * as React from 'react';
 
-import Menu, { MenuItem } from 'material-ui-next/Menu';
-import IconButton from 'material-ui-next/IconButton';
-import { withStyles } from 'material-ui-next/styles';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
 import { withRouter } from 'react-router-dom';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 const styles = theme => ({

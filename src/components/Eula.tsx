@@ -30,8 +30,8 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Button from 'material-ui-next/Button';
-import { withStyles } from 'material-ui-next/styles'
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles'
 //import {fullWidthDialagStyle} from './commonStyles';
 import {eula} from '../res/data/settings';
 import Dialog, {
@@ -39,7 +39,7 @@ import Dialog, {
   DialogContent,
   DialogContentText,
   DialogTitle
-} from 'material-ui-next/Dialog';
+} from 'material-ui/Dialog';
 
 const styles = {
   paragraph: {

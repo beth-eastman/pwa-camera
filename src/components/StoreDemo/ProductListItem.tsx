@@ -32,7 +32,7 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 
-import {ListItem,ListItemText} from 'material-ui-next/List';
+import {ListItem,ListItemText} from 'material-ui/List';
 
 export interface Props {
   product: ProductInterface;

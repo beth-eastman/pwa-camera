@@ -32,7 +32,7 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import ProductListItem from './ProductListItem';
-import List from 'material-ui-next/List';
+import List from 'material-ui/List';
 import {AppPageInterface} from '../Main';
 import {whiteContainer} from '../commonStyles';
 

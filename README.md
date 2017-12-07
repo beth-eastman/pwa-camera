@@ -12,7 +12,13 @@ This boilerplate includes:
 - [x] Jest, Enzyme
 - [x] Offline Plugin
 
+## !!Important!!
+As of **v2.0.1** all import statements with "material-ui-next" should be replaced with
+"material-ui". If you started with a version >= 2.0.1 you don't
+need to change anything. Sorry for any inconvenience. 
+
 ## Prerequisites
+
 
 Before starting you should be familiar with:
 

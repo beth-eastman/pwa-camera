@@ -32,9 +32,9 @@
  */
 import * as React from 'react';
 
-import Menu, { MenuItem } from 'material-ui-next/Menu';
-import IconButton from 'material-ui-next/IconButton';
-import { withStyles } from 'material-ui-next/styles';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withRouter } from 'react-router-dom';
 const styles = theme => ({

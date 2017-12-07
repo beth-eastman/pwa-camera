@@ -31,9 +31,9 @@
  */
 import * as React from 'react';
 import {AppPageInterface} from '../Main';
-import Checkbox from 'material-ui-next/Checkbox';
-import {withStyles}from 'material-ui-next/styles';
-import { FormGroup, FormControlLabel } from 'material-ui-next/Form';
+import Checkbox from 'material-ui/Checkbox';
+import {withStyles}from 'material-ui/styles';
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
 export interface Props {
   appPage: AppPageInterface;
   classes: any;
