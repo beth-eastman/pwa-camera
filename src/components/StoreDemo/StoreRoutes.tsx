@@ -40,6 +40,7 @@ import ProductsList from '../../containers/StoreDemo/ProductsList';
 import RouteGroup from '../RouteGroup';
 import RouteItem from '../RouteItem';
 import MainHomePage from '../HomePage';
+import AccountPage from './Account';
 import HomeIcon from 'material-ui-icons/Home';
 import InfoIcon from 'material-ui-icons/Info';
 import StoreIcon from 'material-ui-icons/Store';
@@ -65,6 +66,7 @@ class StoreRoutes extends React.Component<Props, State>{
           <RouteItem tab={1} bnav={1} bnavIcon={<InfoIcon/>} title={"App Info"} exact path={'/appinfo'} leftIcon={leftMenuIcon} componentPage={HomePage} />
           <RouteItem tab={2} bnav={2} bnavIcon={<StoreIcon />} title={"Products"}  exact path={'/products'} leftIcon={leftMenuIcon} componentPage={ProductsList} />
           <RouteItem tabIndex={2} bnavIndex={2} title={"Details"} exact path={'/products/:id'} {...leftIconProps('/products')} componentPage={ProductDetails} />
+          <RouteItem title={"Account"} exact path={'/account'} leftIcon={leftMenuIcon}componentPage={AccountPage} />
      </RouteGroup>;
   }
 }

@@ -88,7 +88,7 @@ export interface AppPageInterface {
    * @param {string} tabsId - not Currently in use
    * @param {string} tabId - The "id" or "index" for the tab you want activate
    */
-  selectTab(tabsId: string | number, tabIndex:number): void;
+  selectTab(tabsId: string | number, tabIndex:number | false): void;
   /**
    * This object is furnished by the react-router-dom module
    * and provides methods with which to navigate throughout the app
@@ -182,7 +182,7 @@ export interface State {
   leftIcon: JSX.Element;
   titlePath: string;
   rightIcon: JSX.Element;
-  tabId: number;
+  tabId: number | false;
   tabsId: string | number;
   mainTabs: JSX.Element[];
   tempTabs: JSX.Element[] | undefined;
@@ -275,7 +275,7 @@ export default class Main extends React.Component<Props, State>{
    * @param  {number} tabId - the index of the current active tab
    * @return {void}
    */
-  handleSelectTab = (tabsId: string | number,tabId:number) => {
+  handleSelectTab = (tabsId: string | number,tabId:number | false) => {
     this.setState({
       tabsId,
       tabId

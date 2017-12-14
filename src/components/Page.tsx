@@ -75,10 +75,14 @@ export default class Page extends React.Component<Props, State>{
 
     if(typeof tab !== 'undefined'){
       appPage.selectTab('someId',tab);
+    } else {
+      appPage.selectTab('someId',false);
     }
 
     if(typeof bnav !== 'undefined'){
       appPage.setBottomNavigationId(bnav);
+    } else {
+      appPage.setBottomNavigationId(null);
     }
  
     appPage.setTitlePath(titlePath);

@@ -37,6 +37,7 @@ import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withRouter } from 'react-router-dom';
+import Divider from 'material-ui/Divider';
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
@@ -115,6 +116,8 @@ class LeftMenu extends React.Component<Props, State>{
                 <MenuItem onClick={this.navClick(basePath )}>Home</MenuItem>
                 <MenuItem onClick={this.navClick(basePath + 'appinfo')}>Demo Home</MenuItem>
                 <MenuItem onClick={this.navClick(basePath + 'products')}>Products</MenuItem>
+                <Divider />
+                <MenuItem onClick={this.navClick(basePath + 'account')}>Account</MenuItem>
               </Menu>]
     ;
   }
