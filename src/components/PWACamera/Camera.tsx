@@ -68,13 +68,6 @@ export default class Camera extends React.Component<Props, State> {
   componentDidMount() {
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (e : any) => this.captureImage(e.target.files));
-
-    const video = document.querySelector('video');
-    const scale = 0.25; // scale down height for canvas display
-    this.setState({
-      height: video.videoHeight * scale,
-      width: video.videoWidth * scale
-    });
   }
 
   /*
@@ -85,7 +78,7 @@ export default class Camera extends React.Component<Props, State> {
   captureImage = (image) => {
     console.log(image);
 
-
+      const that = this;
       var n : any = navigator;
 
       // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -129,6 +122,12 @@ export default class Camera extends React.Component<Props, State> {
           video.play();
           const button : any = document.getElementById('open');
           button.disabled = true;
+
+          const scale = 0.25; // scale down height for canvas display
+          that.setState({
+            height: video.videoHeight * scale,
+            width: video.videoWidth * scale
+          });
         };
       })
       .catch(function(err) {
@@ -157,7 +156,7 @@ export default class Camera extends React.Component<Props, State> {
         Take a photo by pressing the button below<br /><br />
         Simple HTML solution for mobile with no javascript:<br />
         <input type="file" accept="image/*;capture=camera" id="file-input" capture /><br /><br />
-        <video id="camera" /><br />
+        <video id="camera" style={{ width: '100%', maxWidth: 500 }}/><br />
         <button id="open" onClick={this.captureImage}>Open Camera</button>
         <button id="close" onClick={this.closeCamera}>Take Photo</button>
         <canvas style={{ height: this.state.height, width: this.state.width  }} hidden={true} />
