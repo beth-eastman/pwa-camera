@@ -1,6 +1,8 @@
 /**
  * @file GlobalComponents.tsx
- * Global components for the app.
+ * Global components for the app. These components are included in the app
+ * layout and therefor are always available regardless of th current active
+ * router.
  *
  * Created by T2 on 08/22/2017
  *

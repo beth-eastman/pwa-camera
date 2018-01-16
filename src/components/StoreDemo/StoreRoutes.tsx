@@ -31,14 +31,19 @@
  */
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import HomePage from "./HomePage";
+/*import HomePage from "./HomePage";*/
 import {AppPageInterface} from '../Main';
 import LeftMenuIcon from './LeftMenuIcon'
-import {menuItem,leftIconProps} from '../AppHOC';
-import ProductDetails from '../../containers/StoreDemo/ProductDetails';
-import ProductsList from '../../containers/StoreDemo/ProductsList';
-import RouteGroup from '../RouteGroup';
+import { menuItem, /*leftIconProps*/ } from '../AppHOC';
+/*import ProductDetails from '../../containers/StoreDemo/ProductDetails';
+import ProductsList from '../../containers/StoreDemo/ProductsList';*/
+/*import RouteGroup from '../RouteGroup';*/
 import RouteItem from '../RouteItem';
+import MainHomePage from '../HomePage';
+/*import AccountPage from './Account';*/
+import HomeIcon from 'material-ui-icons/Home';
+/*import InfoIcon from 'material-ui-icons/Info';
+import StoreIcon from 'material-ui-icons/Store';*/
 
 export interface Props {
   appPage: AppPageInterface;
@@ -52,16 +57,13 @@ export interface State {
 class StoreRoutes extends React.Component<Props, State>{
 
   render(){
-    const basePath = '/store';
-    const defaultProps = {...this.props, ...leftIconProps(basePath),basePath: basePath};
+    const basePath = '/';
+    /*const defaultProps = {...this.props,basePath: basePath};*/
 
-    const leftMenuIcon = menuItem(LeftMenuIcon,basePath);
-    console.log(defaultProps);
-    return <RouteGroup defaultProps={defaultProps} appPage={this.props.appPage}>
-                <RouteItem tab={0} title={"Store"} exact path={basePath} leftIcon={leftMenuIcon} componentPage={HomePage} />
-                <RouteItem tab={1} title={"Products"}  exact path={basePath + '/products'} componentPage={ProductsList} />
-                <RouteItem tabIndex={1} title={"Details"} exact path={basePath + '/products/:id'} {...leftIconProps(basePath + '/products')} componentPage={ProductDetails} />
-           </RouteGroup>;
+    const leftMenuIcon = menuItem(LeftMenuIcon, basePath);
+
+    return <RouteItem tab={0} bnav={0} bnavIcon={<HomeIcon />} title={'Home'} exact path="/" leftIcon={leftMenuIcon}
+     componentPage={MainHomePage} appPage={this.props.appPage}  />;
   }
 }
 

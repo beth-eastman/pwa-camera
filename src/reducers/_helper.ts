@@ -52,7 +52,3 @@ export const arrayRemove = (item,arr) => {
     }
     return copyArray(uniqueArray);
 };
-
-export const computeFacebookPluginUrl = (fburl) => {
-
-};

@@ -97,8 +97,7 @@ export const messageClear = () => {
 var timeOutId = null
 export const sendMessage = (message) => {
 
-  return (dispatch,getState,extraArgs) => {
-    console.log(extraArgs);
+  return (dispatch,getState) => {
     dispatch(messageStart(message));
 
     if(timeOutId){

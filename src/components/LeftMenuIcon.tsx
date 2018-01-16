@@ -30,25 +30,20 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/menu';
-import { Link } from 'react-router-dom';
+import MenuIcon from 'material-ui-icons/Menu';
 
-const LeftMenu = () => {
+/**
+ * Currenty this just a stateless functional component which displays an icon. There is no functionality yet.
+ * @type {Function}
+ */
+const LeftMenuMain = ():React.ReactElement<any> => {
   return (
-    <IconMenu
-
-      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-      targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    >
-      <MenuItem containerElement={<Link to="/" />} primaryText="Home" />
-      <MenuItem containerElement={<Link to="/store" />} primaryText="Store Demo" />
-    </IconMenu>
+    <IconButton color="contrast" aria-label="Menu">
+      <MenuIcon />
+    </IconButton>
     );
 }
 
 
-export default LeftMenu;
+export default LeftMenuMain;

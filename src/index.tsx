@@ -30,12 +30,12 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
+import SvgIcon from 'material-ui/SvgIcon';
+(global as any).__MUI_SvgIcon__ = SvgIcon;
 import {compose, createStore,applyMiddleware} from 'redux';
-import {persistStore, autoRehydrate} from 'redux-persist'
+import {persistStore, autoRehydrate} from 'redux-persist';
 import * as localForage from "localforage";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+
 import thunk from 'redux-thunk';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -43,13 +43,19 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './containers/Main';
-
+import { MuiThemeProvider,createMuiTheme} from 'material-ui/styles';
 import reducer from './reducers';
 import {setUserPlatform} from './actions';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 OfflinePluginRuntime.install();
 
 injectTapEventPlugin();
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', // Switching the dark mode on is a single property value change.
+  },
+});
+
 
 require('./index.html'); //load and emit index.html to destination directory
 require('./manifest.json'); //load and emit manifest.json to destination directory
@@ -120,12 +126,12 @@ const render = (RootComponent: any) => {
 
     ReactDOM.render(
         <AppContainer>
-         <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-            <Provider store={store}>
-              <HashRouter>
-                <RootComponent version={__APP_VERSION__} defaultTitle={__APP_NAME__} />
-              </HashRouter>
-            </Provider>
+         <MuiThemeProvider theme={theme}>
+          <Provider store={store}>
+            <HashRouter>
+              <RootComponent version={__APP_VERSION__} defaultTitle={__APP_NAME__} />
+            </HashRouter>
+          </Provider>
           </MuiThemeProvider>
         </AppContainer>,
         document.getElementById("spaApp")

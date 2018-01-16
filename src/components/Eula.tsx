@@ -30,50 +30,66 @@
  * Original Software: robert.a.kayl.civ@mail.mil
  */
 import * as React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import {fullWidthDialagStyle} from './commonStyles';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles'
+//import {fullWidthDialagStyle} from './commonStyles';
 import {eula} from '../res/data/settings';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from 'material-ui/Dialog';
 
+const styles = {
+  paragraph: {
+      marginBottom: 15
+  }
+}
 
 interface MyProps {
   eulaAccepted: boolean;
   accept(): any;
   reject(): any;
   hideRejectButton: boolean;
+  classes: any;
 }
 
 interface MyState {
   suppressOpen: boolean;
 }
 
-export default class Eula extends React.Component<MyProps, MyState> {
+export class Eula extends React.Component<MyProps, MyState> {
   constructor(props){
     super(props);
     this.state = {suppressOpen: true};
   }
   componentDidMount(){
+    //This delay allows for data rehydration before checking if the 
+    //User has accepted the EULA
     setTimeout(() => {
       this.setState({suppressOpen: false});
     },1000);
   }
 
   render(){
-    const {accept,reject,eulaAccepted,hideRejectButton} = this.props;
+    const {accept,reject,eulaAccepted,hideRejectButton,classes} = this.props;
+   
     let actions = [
-      <FlatButton
-        label="Accept"
-        primary={true}
-        onTouchTap={accept}
-      />
+      <Button
+        color="primary"
+        key='acceptbtn'
+        onClick={accept}
+      >Accept</Button>
     ];
 
+    //On iOS and Web this is hidden
     if(!hideRejectButton){
-      actions.push(<FlatButton
-            label="Reject"
-            primary={true}
-            onTouchTap={reject}
-        />);
+      actions.push(<Button
+            key='rejectbtn'
+            color="primary"
+            onClick={reject}
+        >Reject</Button>);
     }
 
     return (
@@ -81,17 +97,21 @@ export default class Eula extends React.Component<MyProps, MyState> {
 
         <Dialog
           title="EULA"
-          actions={actions}
-          modal={false}
           open={!eulaAccepted && !this.state.suppressOpen}
-          contentStyle={fullWidthDialagStyle}
-          autoScrollBodyContent={true}
         >
-          <h3>{eula.title}</h3>
-          {eula.paragraphs.map((para,i) => <p key={i}>{para}</p>)}
-
+          <DialogTitle>{eula.title}</DialogTitle>
+          <DialogContent>
+            {eula.paragraphs.map((para,i) => {
+              return <DialogContentText className={classes.paragraph} key={i}>{para}</DialogContentText>;
+            })}
+          </DialogContent>
+          <DialogActions>
+            {actions}
+          </DialogActions>
         </Dialog>
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Eula)

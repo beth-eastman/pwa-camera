@@ -64,7 +64,13 @@ const productsData = [
   makeProduct(7,'Ear Plugs',6.99,'plugs.jpg',"So you don't have to listen"),
   makeProduct(8,'Desk Lamp',15.99, 'desk_lamp.jpg',"Shine a light on this"),
   makeProduct(9,'Dune Buggy',12000, 'dune_buggy.jpg', ""),
-  makeProduct(10,'Gift Card',20.00,'gift_card.jpg',"Yep")
+  makeProduct(10,'Gift Card',20.00,'gift_card.jpg',"Yep"),
+  makeProduct(11,'Hawaii Chair',6699.00,'hawaii.jpg',"Aloha"),
+  makeProduct(12,'The Snuggie', 14.99,'snuggie.jpg',"The Blanket That Has Sleeves, Now With Pockets!!!!!!!!!!"),
+  makeProduct(13,'Unicorn Meat', 5.99,'unicorn-meat.jpg',"Tastes like chicken."),
+  makeProduct(14,'Pet Rock', 55.99,'pet-rock.jpg',"Stay!"),
+  makeProduct(15,'Pet Sweep', 55.99,'pet-sweep.jpg',"Good Dog!"),
+  makeProduct(16,'Crib Dribbler', 45.99,'crib-dribbler.jpg',"")
 ];
 
 export const normalizedProducts = normalize(productsData, productArraySchema);

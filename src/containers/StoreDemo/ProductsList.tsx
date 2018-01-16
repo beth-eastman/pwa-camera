@@ -16,10 +16,13 @@ const calColumns = (state,ownProps) => {
 
     return 6;
   }
-  if(width > 600){
+  if(width > 800){
     return 4;
   }
-  return 2;
+  if(width > 300){
+    return 2;
+  }
+  return 1;
 }
 
 interface DispatchToPropsInterface{
@@ -56,7 +59,7 @@ const stateToProps = (state,ownProps):StateToPropsInterface => {
 const dispatchToProps = (dispatch,ownProps) => {
   return {
     itemClick: (product: ProductInterface) => {
-       ownProps.history.push(ownProps.basePath + '/products/' + product.id);
+       ownProps.history.push(ownProps.basePath + 'products/' + product.id);
     },
     setPage: (pageIdx: number) => {
       dispatch(setProductPage(pageIdx));

@@ -1,7 +1,11 @@
 /**
  * @file Bundle.tsx
  * 
+ * This component is used to allow for async loading/code-splitting for components. 
+ * For examples see:
  *
+ * ./Main.tsx and ./MainContent.tsx
+ * 
  * Created by T2 on 08/22/2017
  *
  * T2 PWA Starter

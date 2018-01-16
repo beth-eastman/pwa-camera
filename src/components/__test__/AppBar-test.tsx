@@ -29,19 +29,21 @@
  * Government Agency Point of Contact for
  * Original Software: robert.a.kayl.civ@mail.mil
  */
-import * as React from 'react';
-import AppBar from  '../AppBar';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as renderer from 'react-test-renderer';
 
-test('Test AppBar Snapshot', () => {
 
-  const component = renderer.create(
-    <MuiThemeProvider>
-        <AppBar rightIcon={null} title="phony title" leftIcon={null}  onTitleClick={(event: any) => {}} /> />
-    </MuiThemeProvider>
-  );
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+// import * as React from 'react';
+// //import AppBar from  '../AppBar';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import * as renderer from 'react-test-renderer';
 
-});
+// xtest('Test AppBar Snapshot', () => {
+//  //<AppBar rightIcon={null} title="phony title" leftIcon={null}  onTitleClick={(event: any) => {}} /> />
+//   const component = renderer.create(
+//     <MuiThemeProvider>
+        
+//     </MuiThemeProvider>
+//   );
+//   let tree = component.toJSON();
+//   expect(tree).toMatchSnapshot();
+
+// });

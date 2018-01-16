@@ -1,6 +1,7 @@
 /**
  * @file Page.tsx
- * Wrapper that passes functionality down to a component.
+ * This component is meant to wrap another component and implements common features for page views. It wraps arround another component
+ * so that said component does not need to implement any interfaces
  *
  * Created by T2 on 08/22/2017
  *
@@ -39,13 +40,14 @@ export interface Props {
   titlePath?: string; //the path navigated to when appbar title is clicked
   title?: string;
   tab?: number;
+  bnav?: number;
   tabs?: JSX.Element[];
   defaultTabs?: JSX.Element[];
 }
 
 
 export interface State {
-
+  hasError: boolean;
 }
 
 export default class Page extends React.Component<Props, State>{
@@ -58,9 +60,14 @@ export default class Page extends React.Component<Props, State>{
     defaultTabs: []
   }
 
-
+  constructor(props){
+    super(props);
+    this.state = {
+      hasError: false
+    }
+  }
   componentWillMount(){
-    const {appPage,leftIcon,titlePath,title,rightIcon,tab} = this.props;
+    const {appPage,leftIcon,titlePath,title,rightIcon,tab,bnav} = this.props;
 
     appPage.setRightIcon(rightIcon);
 
@@ -68,11 +75,18 @@ export default class Page extends React.Component<Props, State>{
 
     if(typeof tab !== 'undefined'){
       appPage.selectTab('someId',tab);
+    } else {
+      appPage.selectTab('someId',false);
     }
 
-    if(titlePath){
-       appPage.setTitlePath(titlePath);
+    if(typeof bnav !== 'undefined'){
+      appPage.setBottomNavigationId(bnav);
+    } else {
+      appPage.setBottomNavigationId(null);
     }
+ 
+    appPage.setTitlePath(titlePath);
+
 
     if(title){
         appPage.setPageTitle(title);
@@ -80,13 +94,28 @@ export default class Page extends React.Component<Props, State>{
 
   }
 
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
+    console.log(error);
+    console.log(info);
+  }
+
   componentWillUnmount(){
      const {appPage} = this.props;
      appPage.setTabs(undefined);
+     if(appPage.bnavId !== 'default'){
+       appPage.setBottomNavigatioDefaults();
+     }
+     
   }
 
   render(){
-    return <div>
+    if(this.state.hasError){
+      return <h3>Cannot Load this Page</h3>;
+    }
+    return <div style={{paddingBottom: 56}}>
              {this.props.children}
            </div>;
   }

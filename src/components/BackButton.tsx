@@ -32,7 +32,7 @@
  */
 import * as React from 'react';
 
-import ArrowBack from 'material-ui/svg-icons/navigation/chevron-left';
+import ArrowBack from 'material-ui-icons/ChevronLeft';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
 

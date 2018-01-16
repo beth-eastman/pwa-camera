@@ -34,27 +34,43 @@ import {ProductInterface} from '../../res/data/products';
 import {AppPageInterface} from '../Main';
 import FavoriteCheckbox from '../FavoriteCheckBox';
 import ProductContextMenu from './ProductContextMenu';
-import {Card, /*CardActions, CardHeader,*/ CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import {withStyles} from 'material-ui/styles';
+import ShareIcon from 'material-ui-icons/Share';
+import IconButton from 'material-ui/IconButton';
 
+
+//TODO re-implement overlay and favoriting feature
+const styles = {
+  card: {
+    maxWidth: 500,
+    margin: '10px auto 0px auto'
+  },
+  media: {
+    height: 500,
+  },
+};
 
 export interface Props {
   product: ProductInterface;
   appPage: AppPageInterface;
   isFavorite: boolean;
   toggleFavorite: (product: ProductInterface, isFavorite:boolean) => void;
+  classes: any;
 }
 
 export interface State {
 
 }
 
-export default class ProductDetails extends React.Component<Props, State>{
+export class ProductDetails extends React.Component<Props, State>{
 
   componentWillMount(){
       const {product,appPage} = this.props;
       appPage.setPageTitle(product.title);
       this.props.appPage.setRightIcon(<ProductContextMenu />);
-      //this.props.appPage.setTabs([]);
+      this.props.appPage.setBottomNavigation([]);
   }
 
   handleSetToggle = () => {
@@ -67,25 +83,36 @@ export default class ProductDetails extends React.Component<Props, State>{
   }
 
   render(){
-    const {product,isFavorite} = this.props;
+    const {product, classes,isFavorite} = this.props;
 
+    //return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
+    return   <Card className={classes.card}>
+      <CardMedia
+        className={classes.media}
+        image={product.image}
+        title={product.title}
+      />
+      <CardContent>
+        <Typography type="headline" component="h2">
+          {product.title} ${product.price}
+        </Typography>
+        <Typography type="subheading" component="h4">
+          By ACME
+        </Typography>
+        <Typography component="p">
+            {product.description}
+        </Typography>
+      </CardContent> 
+      <CardActions disableActionSpacing>
+        <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
+        <IconButton aria-label="Share">
+          <ShareIcon />
+        </IconButton>
+        <div className={classes.flexGrow} />
 
-    return   <Card style={{maxWidth: 500,margin: '0px auto 0px auto'}}>
-    <CardMedia
-      overlay={<CardTitle title={<div>${product.price}
-
-        <div style={{position: 'absolute',top: 10, right: 0}}>
-          <FavoriteCheckbox toggleFavorite={this.handleSetToggle()} checked={isFavorite} />
-        </div>
-      </div>}  />}
-    >
-      <img  src={product.image} alt="" />
-    </CardMedia>
-    <CardTitle title={product.title} subtitle="By ACME" />
-    <CardText>
-        <div>{product.description}</div>
-
-    </CardText>
-  </Card>
+      </CardActions>
+    </Card>
   }
 }
+
+export default withStyles(styles)(ProductDetails);

@@ -36,6 +36,7 @@
 import * as React from 'react';
 
 import {Tab} from 'material-ui/Tabs';
+import { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import {AppPageInterface} from './Main';
 
 export interface Props {
@@ -72,6 +73,14 @@ export default class RouteGroup extends React.Component<Props,any> {
     }
   }
 
+  handleBottomNavigationActive = (path) => {
+    const {appPage, onActive} = this.props;
+    return (bottomNav) => {
+      appPage.history.push(path);
+      onActive && onActive(bottomNav, path);
+    }
+  }
+
 
   handleCreateTabs = () => {
     const {appPage} = this.props;
@@ -80,19 +89,45 @@ export default class RouteGroup extends React.Component<Props,any> {
     this.props.children
       .filter((child) => typeof child.props['tab'] !== 'undefined')
       .map((child, idx) => {
-        tabs.push(<Tab onActive={this.handleTabActive(child.props.path)} label={child.props.title} value={idx} />);
+        tabs.push(<Tab onClick={this.handleTabActive(child.props.path)} label={child.props.title} value={idx} />);
       });
 
     appPage.setDefaultTabs(tabs);
     appPage.tabAdded();
   }
+  handleBottomNavigationButtonClick = (path,idx) => {
+    const {appPage} = this.props;
+
+    return (event) => {
+      appPage.setBottomNavigationId(idx);
+      appPage.history.push(path);
+    }
+  }
+  handleCreateBottomNavigation = () => {
+    const {appPage} = this.props;
+    let bnavigations = [];
+
+    this.props.children
+      .filter((child) => typeof child.props['bnav'] !== 'undefined')
+      .map((child, idx) => {
+        const icon = child.props['bnavIcon'] !== 'undefined' ? child.props['bnavIcon'] : null;
+        bnavigations.push(<BottomNavigationButton onClick={this.handleBottomNavigationButtonClick(child.props.path,idx)} icon={icon} label={child.props.title} value={idx} key={idx} />);
+      });
+    //console.log(bnavigations);
+    appPage.setMainBottomNavigation(bnavigations);
+  }
+
+
+
   componentWillMount(){
     this.handleCreateTabs();
+    this.handleCreateBottomNavigation();
   }
 
   componentWillUnmount(){
     const {appPage} = this.props;
     appPage.setDefaultTabs([]);
+    appPage.setMainBottomNavigation([]);
     appPage.tabRemoved();
   }
 

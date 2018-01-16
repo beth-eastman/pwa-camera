@@ -52,7 +52,7 @@ export const sortProducts = (sortBy: string, sortDir = 'asc') => {
 }
 
 export const searchProducts = (text: string) => {
-  return (dispatch,getState,extraArgs) => {
+  return (dispatch,getState) => {
       //search change pagination so must reset page on
       // any action which filters results
       dispatch(setProductPage(0));
@@ -60,7 +60,7 @@ export const searchProducts = (text: string) => {
   }
 }
 
-export const searchProductText= (text: string) => {
+export const searchProductText = (text: string) => {
   return {
     type: FILTER_PRODUCTS,
     text

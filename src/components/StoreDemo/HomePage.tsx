@@ -32,26 +32,34 @@
 import * as React from 'react';
 import {AppPageInterface} from '../Main';
 import Checkbox from 'material-ui/Checkbox';
+import {withStyles}from 'material-ui/styles';
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
 export interface Props {
   appPage: AppPageInterface;
+  classes: any;
 }
 
+const styles = {
+  label: {
+    color: 'black'
+  }
+}
 
-export default class HomePage extends React.Component<Props, {}>{
+export class HomePage extends React.Component<Props, {}>{
 
   render(){
-    const {appPage} = this.props;
+    const {appPage,classes} = this.props;
     const versionChanged = appPage.version !== '0.0.0';
     return <div>
               <div>
-                <h3>Version</h3>
-                <p>Make sure you update your version number for each deployment</p>
-                <Checkbox checked={versionChanged} label={'Version: ' + appPage.version} />
-                {!versionChanged &&<div>Please change from the default version number in your webpack config<br />
+                <FormGroup row>
+                  <FormControlLabel classes={classes} control={<Checkbox checked={versionChanged} />} label={'Version: ' + appPage.version} />
+                </FormGroup>
+
+              
+                {!versionChanged && <div>Please change from the default version number in your webpack config<br />
                   You will need to restart webpack
                   </div>}
-
-
               </div>
               <div>
                   <h3>View Port Dimensions</h3>
@@ -61,3 +69,5 @@ export default class HomePage extends React.Component<Props, {}>{
     </div>;
   }
 }
+
+export default withStyles(styles)(HomePage)

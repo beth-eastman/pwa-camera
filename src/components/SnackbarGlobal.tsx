@@ -31,6 +31,8 @@
  */
 import * as React from 'react';
 import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 
 export interface Props {
   message: string;
@@ -56,11 +58,22 @@ export default class SnackbarGlobal extends React.Component<Props, State>{
   }
 
   render(){
+    //return null;
     return  <Snackbar
               open={this.props.open}
-              message={this.props.message}
-              onActionTouchTap={this.handleOnclick}
-              action="Close"
+              message={<span>{this.props.message}</span>}
+
+              action={[
+                <IconButton
+                  key="close"
+                  aria-label="Close"
+                  color="inherit"
+                  onClick={this.handleOnclick}
+                >
+                  <CloseIcon />
+                </IconButton>,
+              ]}
+
               />;
   }
 }

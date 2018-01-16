@@ -32,8 +32,8 @@
 import * as React from 'react';
 import {ProductInterface} from '../../res/data/products';
 import FavoriteCheckbox from '../FavoriteCheckBox';
-import {GridList, GridTile} from 'material-ui/GridList';
-
+import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
+//import ButtonBase from 'material-ui/ButtonBase';
 import {AppPageInterface} from '../Main'
 export interface FavoriteProductInterface extends ProductInterface{
   isFavorite: boolean;
@@ -87,24 +87,22 @@ export default class ProductsList extends React.Component<Props, State>{
   }
 
   render(){
-    const {products/*page,lastPage,setPage,*/} = this.props;
+    const {products,cols/*page,lastPage,setPage,*/} = this.props;
 
-    return <div>
+    return <GridList cols={cols ? cols : 2} cellHeight={180}>
+         {products.map(tile => {
+           return  <GridListTile key={tile.id}>
+            <img style={{cursor: 'pointer'}} src={tile.image} alt={tile.title} onClick={this.handleItemClick(tile)} />
+            <GridListTileBar
+              title={<span style={{cursor: 'pointer'}} onClick={this.handleItemClick(tile)}>{tile.title}</span>}
+              subtitle={<span>by: ACME</span>}
+              actionIcon={
+                <FavoriteCheckbox toggleFavorite={this.handleToggleFavorite(tile)} checked={tile.isFavorite} />
+              }
+            />
+          </GridListTile>
+         })}
 
-
-              <GridList cols={this.props.cols}>
-                {products.map(product => {
-                  return <GridTile
-                            key={product.id}
-                            title={product.title}
-                            onTouchTap={this.handleItemClick(product)}
-                            actionIcon={<FavoriteCheckbox toggleFavorite={this.handleToggleFavorite(product)} checked={product.isFavorite} />}
-                          >
-                            <img key={product.image} src={product.image} />
-                          </GridTile>
-                })}
-              </GridList>
-
-           </div>;
+    </GridList>
   }
 }
