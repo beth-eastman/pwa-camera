@@ -1,6 +1,6 @@
 {
-  "name": "Demo App",
-  "short_name": "Demo App V2.0.0",
+  "name": "PWA Camera",
+  "short_name": "PWA Camera",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#FF9800",
