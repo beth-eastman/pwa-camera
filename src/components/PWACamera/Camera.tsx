@@ -45,13 +45,21 @@ export interface Props {
 }
 
 export interface State {
-
+  photo: any;
+  height: number;
+  width: number;
 }
 
 export default class Camera extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      photo: null,
+      height: 0,
+      width: 0,
+    }
 
     this.captureImage = this.captureImage.bind(this);
     this.closeCamera = this.closeCamera.bind(this);
@@ -126,8 +134,16 @@ export default class Camera extends React.Component<Props, State> {
     const button : any = document.getElementById('open'); // enabled open camera button
     button.disabled = false;
 
-    var video = document.querySelector('video');
-    video.pause();
+    // pause video && set canvas size to take photo
+    const video : any = document.querySelector('video');
+    /*const height = video.videoHeight / (video.videoWidth / width);*/
+    this.setState({ height: video.videoHeight, width: video.videoWidth });
+
+    const canvas = document.querySelector('canvas');
+    var context = canvas.getContext("2d");
+    context.drawImage(video, 0, 0, 500, 300);
+    const data = canvas.toDataURL("image/png");
+    this.setState({ photo: data });
   }
 
   render() {
@@ -138,7 +154,15 @@ export default class Camera extends React.Component<Props, State> {
         <input type="file" accept="image/*;capture=camera" id="file-input" capture /><br /><br />
         <video id="camera" /><br />
         <button id="open" onClick={this.captureImage}>Open Camera</button>
-        <button id="close" onClick={this.closeCamera}>Close Camera</button>
+        <button id="close" onClick={this.closeCamera}>Take Photo</button>
+        <canvas style={{ height: this.state.height, width: this.state.width  }} hidden={true} />
+        <br />
+        {this.state.photo &&
+          <div style={{ padding: 10 }}>
+          Your image: <br />
+          <img src={this.state.photo} />
+          </div>
+        }
       </div>
    );
   }
