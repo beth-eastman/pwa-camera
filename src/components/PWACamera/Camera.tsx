@@ -64,6 +64,8 @@ export default class Camera extends React.Component<Props, State> {
 
   /*
     Capture the image taken in the camera
+
+    Uses a polyfill to use getUserMedia in older browsers provided by the mozilla developer network
    */
   captureImage = (image) => {
     console.log(image);
@@ -98,7 +100,7 @@ export default class Camera extends React.Component<Props, State> {
         }
       }
 
-      n.mediaDevices.getUserMedia({ audio: true, video: true })
+      n.mediaDevices.getUserMedia({ audio: false, video: true })
       .then(function(stream) {
         var video = document.querySelector('video');
         // Older browsers may not have srcObject
@@ -133,7 +135,7 @@ export default class Camera extends React.Component<Props, State> {
       <div>
         Take a photo by pressing the button below<br /><br />
         Simple HTML solution for mobile with no javascript:<br />
-        <input type="file" accept="image/*;capture=camera" id="file-input" capture /><br />
+        <input type="file" accept="image/*;capture=camera" id="file-input" capture /><br /><br />
         <video id="camera" /><br />
         <button id="open" onClick={this.captureImage}>Open Camera</button>
         <button id="close" onClick={this.closeCamera}>Close Camera</button>
