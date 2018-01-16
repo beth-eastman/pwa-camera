@@ -57,8 +57,8 @@ export default class Camera extends React.Component<Props, State> {
 
     this.state = {
       photo: null,
-      height: 0,
-      width: 0,
+      height: null,
+      width: null,
     }
 
     this.captureImage = this.captureImage.bind(this);
@@ -68,6 +68,13 @@ export default class Camera extends React.Component<Props, State> {
   componentDidMount() {
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (e : any) => this.captureImage(e.target.files));
+
+    const video = document.querySelector('video');
+    const scale = 0.25; // scale down height for canvas display
+    this.setState({
+      height: video.videoHeight * scale,
+      width: video.videoWidth * scale
+    });
   }
 
   /*
@@ -136,12 +143,10 @@ export default class Camera extends React.Component<Props, State> {
 
     // pause video && set canvas size to take photo
     const video : any = document.querySelector('video');
-    /*const height = video.videoHeight / (video.videoWidth / width);*/
-    this.setState({ height: video.videoHeight, width: video.videoWidth });
 
     const canvas = document.querySelector('canvas');
     var context = canvas.getContext("2d");
-    context.drawImage(video, 0, 0, 500, 300);
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const data = canvas.toDataURL("image/png");
     this.setState({ photo: data });
   }
