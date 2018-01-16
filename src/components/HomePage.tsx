@@ -31,6 +31,7 @@
  */
 import * as React from 'react';
 import {AppPageInterface} from './Main';
+import Camera from './PWACamera/Camera';
 
 declare module 'react' { //See https://github.com/zilverline/react-tap-event-plugin/issues/58
     interface HTMLProps<T> {
@@ -47,19 +48,20 @@ export interface State {
 
 }
 
-export default class Home extends React.Component<Props, State>{
+export default class Home extends React.Component<Props, State> {
 
 
-  componentWillMount(){
+  componentWillMount() {
     //This is how you can set the page title dynamically
     this.props.appPage.setPageTitle("Home");
   }
 
-  render(){
+  render() {
 
-    return <div>
-               <h1>Under Construction</h1>
-               
-          </div>;
+    return(
+      <div style={{ margin: '0 auto', textAlign: 'center', padding: 10 }} >
+        <Camera />
+      </div>
+    );
   }
 }
